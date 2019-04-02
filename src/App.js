@@ -49,7 +49,7 @@ state ={
         <Switch>
                 {/* <Route exact path="/" /> */}
                 <Route exact path="/" render={(props) => <BodyComponent {...props} components={Home}/>} />
-                <Route  path="/Plants/AllPlants/" render={(props) => <BodyComponent {...props} components={PlantsList}/>}/>
+                <Route  path="/Plants/" render={(props) => <BodyComponent {...props} components={PlantsList}/>}/>
                 {/* <Route path="Plants/PlantScap" component={HomeSearchBar} />  */}
             </Switch>
       </Router>

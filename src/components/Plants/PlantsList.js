@@ -5,29 +5,179 @@ import GridList from '@material-ui/core/GridList';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 
-const img_arr= {
+const Products= {
 
-    'Images' : {
-        'Images1' :[
+    'PlantsList' : {
+        'Plants' :[
             {
                 'id':1,
-                'url':'images/Home_Img_1/img_1.jpg',
-                'to':'Plants/PlantScap/cactus'
+                'name' : 'Plant1',
+                'url':'images/airpurify/img_1.jpg',
+                'to':'/Plants/ProductDetail/',
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
             },
             {
                 'id':2,
-                'url':'images/Home_Img_1/img_2.jpg',
-                'to':'/plants/offers/'
+                'name' : 'Plant2',
+                'url':'images/airpurify/img_2.jpg',
+                'to':'/Plants/ProductDetail/',
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
             },
             {
                 'id':3,
-                'url':'images/Home_Img_1/img_3.jpg',
-                'to':'/seeds/offers/'
+                'name' : 'Plant3',
+                'url':'images/airpurify/img_3.jpg',
+                'to':'/Plants/ProductDetail/',
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
             },
             {
                 'id':4,
-                'url':'images/Home_Img_1/img_4.jpg',
-                'to':'/fertilizer/offers/'
+                'name' : 'Plant4',
+                'url':'images/airpurify/img_4.jpg',
+                'to':'/Plants/ProductDetail/',
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                'id':5,
+                'name' : 'Plant5',
+                'url':'images/airpurify/img_5.jpg',
+                'to':'/Plants/ProductDetail/',
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                'id':6,
+                'name' : 'Plant6',
+                'url':'images/airpurify/img_6.jpg',
+                'to':'/Plants/ProductDetail/',
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                'id':7,
+                'name' : 'Plant7',
+                'url':'images/airpurify/img_7.jpg',
+                'to':'/Plants/ProductDetail/',
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                'id':8,
+                'name' : 'Plant8',
+                'url':'images/airpurify/img_8.jpg',
+                'to':'/Plants/ProductDetail/',
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                'id':9,
+                'name' : 'Plant9',
+                'url':'images/airpurify/img_9.jpg',
+                'to':'/Plants/ProductDetail/',
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                'id':10,
+                'name' : 'Plant10',
+                'url':'images/airpurify/img_10.jpg',
+                'to':'/Plants/ProductDetail/',
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                'id':11,
+                'name' : 'Plant11',
+                'url':'images/airpurify/img_11.jpg',
+                'to':'/Plants/ProductDetail/',
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                'id':12,
+                'name' : 'Plant12',
+                'url':'images/airpurify/img_12.jpg',
+                'to':'/Plants/ProductDetail/',
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
             },
 
 
@@ -35,13 +185,36 @@ const img_arr= {
     }
 }
 
-const PlantsList = () => {
+function PlantsList (){
+
+    const {Plants} = Products.PlantsList;
+    console.log(Plants)
 
     return (
-        <div>PlantsList</div>
+        <ImageGrid>
+                {Plants.map((list,key) =>
+                <Link to={`/${list.to}`}>
+                 <Poster src={`/${list.url}`} alt='no image'/>
+                 </Link>
+            )}
+        </ImageGrid>
     )
 
 }
 
 export default PlantsList;
+
+const ImageGrid = styled.div`
+ display:grid;
+ padding:-1rem;
+ grid-template-columns : repeat(4, 1fr);
+ grid-row-gap:1rem;
+ margin-top:5px;
+ background-color:white;
+ margin:5%
+`
+const Poster = styled.img`
+    box-shadow: 0 0 35px white;
+    cursor:pointer;
+`
 
