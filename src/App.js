@@ -15,7 +15,7 @@ import HomeSearchBar from './main/HomeSearchBar';
 import PlantsList from './components/Plants/PlantsList'
 import BodyComponent from './components/BodyComponent'
 import ImgGrid from './main/ImgGrid';
-
+import Page404 from './components/Page404'
 
 const middleware = [thunk,logger]
 const store = createStore(
@@ -27,9 +27,8 @@ class App extends Component {
 state ={
 
   PlantsList :'PlantsList',
-  Home : 'ImgGrid'
-
-
+  Home : 'ImgGrid',
+  
 
 }
   
@@ -50,6 +49,12 @@ state ={
                 {/* <Route exact path="/" /> */}
                 <Route exact path="/" render={(props) => <BodyComponent {...props} components={Home}/>} />
                 <Route  path="/Plants/" render={(props) => <BodyComponent {...props} components={PlantsList}/>}/>
+                <Route  path="/Seeds/" render={(props) => <BodyComponent {...props} components={PlantsList}/>}/>
+                <Route  path="/Pots/" render={(props) => <BodyComponent {...props} components={PlantsList}/>}/>
+                <Route  path="/Soil/" render={(props) => <BodyComponent {...props} components={PlantsList}/>}/>
+               
+                <Route   render={() => <Page404/>} />
+               
                 {/* <Route path="Plants/PlantScap" component={HomeSearchBar} />  */}
             </Switch>
       </Router>

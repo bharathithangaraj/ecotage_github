@@ -145,7 +145,7 @@ class HomeMenuBar extends Component {
             <div  style={{marginLeft:'50px', paddingTop:'5px'}}><HomeMenuList MenuArr={SeedsList} MenuName={Seeds} /></div>
             <div  style={{marginLeft:'50px', paddingTop:'5px'}}><HomeMenuList MenuArr={PotsList} MenuName={Pots} /></div>
          
-            <div  style={{marginLeft:'50px', marginTop:'10px' , textTransform:'capitalize',cursor:'pointer'}}>Soil & Fertilizers</div>
+            <Link to='/soil/' style={{textDecoration:'none',color:'white'}}> <div  style={{marginLeft:'50px', marginTop:'10px' , textTransform:'capitalize',cursor:'pointer'}}>Soil & Fertilizers</div></Link>
       
             </div> 
 

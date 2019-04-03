@@ -17,17 +17,17 @@ const img_arr= {
                 {
                     'id':2,
                     'url':'images/Home_Img_1/img_2.jpg',
-                    'to':'/plants/offers/'
+                    'to':'Plants/offers/'
                 },
                 {
                     'id':3,
                     'url':'images/Home_Img_1/img_3.jpg',
-                    'to':'/seeds/offers/'
+                    'to':'Seeds/offers/'
                 },
                 {
                     'id':4,
                     'url':'images/Home_Img_1/img_4.jpg',
-                    'to':'/fertilizer/offers/'
+                    'to':'Soil/offers/'
                 },
 
 
@@ -36,43 +36,51 @@ const img_arr= {
             'Images2' : [
                 {
                     'id':1,
+                    'name' :'Gardening Kits',
                     'url':'images/Home_Img_2/img_1.jpg',
-                    'to':'/gardenKits/'
+                    'to':'GardenKits/'
                 },
                 {
                     'id':2,
+                    'name' :'Easy Plants',
                     'url':'images/Home_Img_2/img_2.jpg',
-                    'to':'/plants/'
+                    'to':'Plants/'
                 },
                 {
                     'id':3,
+                    'name' :'Minature Toys',
                     'url':'images/Home_Img_2/img_3.jpg',
-                    'to':'/toys/'
+                    'to':'Toys/'
                 },
                 {
                     'id':4,
+                    'name' :'Pebbels',
                     'url':'images/Home_Img_2/img_4.jpg',
-                    'to':'/pebbels/'
+                    'to':'Pebbels/'
                 },
                 {
                     'id':5,
+                    'name' :'Gardening Tools',
                     'url':'images/Home_Img_2/img_5.jpg',
-                    'to':'/gardenTools/'
+                    'to':'GardenTools/'
                 },
                 {
                     'id':6,
+                    'name' :'Soil/Fertilizers',
                     'url':'images/Home_Img_2/img_6.jpg',
-                    'to':'/fertilizer/'
+                    'to':'Fertilizer/'
                 },
                 {
                     'id':7,
+                    'name' :'Air Purifiers',
                     'url':'images/Home_Img_2/img_7.jpg',
-                    'to':'/airpurifiers/'
+                    'to':'Airpurifiers/'
                 },
                 {
                     'id':8,
+                    'name' :'Seed Balls',
                     'url':'images/Home_Img_2/img_8.jpg',
-                    'to':'/seedballs/'
+                    'to':'Seedballs/'
                 },
 
             ],
@@ -177,9 +185,13 @@ function ImgGrid() {
 
      <IconGrid>
             {Images2.map((list,key) =>
+                <div style={{textAlign:'center'}}>
                 <Link to={`/${list.to}`}>
                  <Poster src={list.url} alt='icon'/>
                  </Link>
+                 <br/>
+                 <b style={{color:'#666', fontSize:'10px'}}>{list.name}</b>
+                 </div>
             )}
      </IconGrid>
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ImgGrid from '../main/ImgGrid'
 import PlantsList from './Plants/PlantsList'
+import Page404 from  './Page404'
 
 class BodyComponent extends Component {
     
