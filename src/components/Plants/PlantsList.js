@@ -1,204 +1,17 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 // import Grid from '@material-ui/core/Grid';
 // import { unstable_Box as Box } from '@material-ui/core/Box';
+import Products from '../../JsonData/Products.json';
+import {getProduct} from '../../actions';
 
-const Products= {
-
-    'PlantsList' : {
-        'Plants' :[
-            {
-                'id':1,
-                'name' : 'Set of 3 Air Purifier n Summer Cooling Plants Pack',
-                'url':'images/airpurify/img_1.jpg',
-                'to':'/Plants/ProductDetail/',
-                'price' : '500',
-                "description" : [
-                    {
-                        "height" : 100,
-                        "widht" : 10,
-                        "Life"  : 100
-                    }
-
-                ]
-            },
-            {
-                'id':2,
-                'name' : 'Top 4 Air Purifier Plants for India',
-                'url':'images/airpurify/img_2.jpg',
-                'to':'/Plants/ProductDetail/',
-                'price' : '500',
-                "description" : [
-                    {
-                        "height" : 100,
-                        "widht" : 10,
-                        "Life"  : 100
-                    }
-
-                ]
-            },
-            {
-                'id':3,
-                'name' : 'Table Top / Office Desk Plants For Removing Indoor Toxins',
-                'url':'images/airpurify/img_3.jpg',
-                'to':'/Plants/ProductDetail/',
-                'price' : '500',
-                "description" : [
-                    {
-                        "height" : 100,
-                        "widht" : 10,
-                        "Life"  : 100
-                    }
-
-                ]
-            },
-            {
-                'id':4,
-                'name' : 'Table Top / Office Desk Plants For Gift',
-                'url':'images/airpurify/img_4.jpg',
-                'to':'/Plants/ProductDetail/',
-                'price' : '500',
-                "description" : [
-                    {
-                        "height" : 100,
-                        "widht" : 10,
-                        "Life"  : 100
-                    }
-
-                ]
-            },
-
-            {
-                'id':5,
-                'name' : 'Unity in Diversity - Independence Day Pac',
-                'url':'images/airpurify/img_5.jpg',
-                'to':'/Plants/ProductDetail/',
-                'price' : '500',
-                "description" : [
-                    {
-                        "height" : 100,
-                        "widht" : 10,
-                        "Life"  : 100
-                    }
-
-                ]
-            },
-            {
-                'id':6,
-                'name' : 'Air Purifier Table Top / Office Desk Plants',
-                'url':'images/airpurify/img_6.jpg',
-                'to':'/Plants/ProductDetail/',
-                'price' : '500',
-                "description" : [
-                    {
-                        "height" : 100,
-                        "widht" : 10,
-                        "Life"  : 100
-                    }
-
-                ]
-            },
-            {
-                'id':7,
-                'name' : 'True AC Table Top / Office Desk Plants',
-                'url':'images/airpurify/img_7.jpg',
-                'to':'/Plants/ProductDetail/',
-                'price' : '500',
-                "description" : [
-                    {
-                        "height" : 100,
-                        "widht" : 10,
-                        "Life"  : 100
-                    }
-
-                ]
-            },
-            {
-                'id':8,
-                'name' : 'Top 3 Air Purifier Plants Pack',
-                'url':'images/airpurify/img_8.jpg',
-                'to':'/Plants/ProductDetail/',
-                'price' : '500',
-                "description" : [
-                    {
-                        "height" : 100,
-                        "widht" : 10,
-                        "Life"  : 100
-                    }
-
-                ]
-            },
-
-            {
-                'id':9,
-                'name' : 'Low Maintenance Table Top / Office Desk Plants',
-                'url':'images/airpurify/img_9.jpg',
-                'to':'/Plants/ProductDetail/',
-                'price' : '500',
-                "description" : [
-                    {
-                        "height" : 100,
-                        "widht" : 10,
-                        "Life"  : 100
-                    }
-
-                ]
-            },
-            {
-                'id':10,
-                'name' : 'Cubicle-Friendly Table Top / Office Desk Indoor Plants',
-                'url':'images/airpurify/img_10.jpg',
-                'to':'/Plants/ProductDetail/',
-                'price' : '500',
-                "description" : [
-                    {
-                        "height" : 100,
-                        "widht" : 10,
-                        "Life"  : 100
-                    }
-
-                ]
-            },
-            {
-                'id':11,
-                'name' : 'NASA Recommended Table Top / Office Desk Plants',
-                'url':'images/airpurify/img_11.jpg',
-                'to':'/Plants/ProductDetail/',
-                'price' : '500',
-                "description" : [
-                    {
-                        "height" : 100,
-                        "widht" : 10,
-                        "Life"  : 100
-                    }
-
-                ]
-            },
-            {
-                'id':12,
-                'name' : 'Table Top / Office Desk To Boost Productivity',
-                'url':'images/airpurify/img_12.jpg',
-                'to':'/Plants/ProductDetail/',
-                'price' : '500',
-                "description" : [
-                    {
-                        "height" : 100,
-                        "widht" : 10,
-                        "Life"  : 100
-                    }
-
-                ]
-            },
-
-
-        ]
-    }
-}
 
 const styles = theme => ({
     button: {
@@ -210,45 +23,58 @@ const styles = theme => ({
     },
   });
 
-function PlantsList (){
+class PlantsList extends Component {
 
+    componentDidMount(){
+        
+    
+    }
    
-    const {Plants} = Products.PlantsList;
-    console.log(Plants)
-
-    return (
-        <ImageGrid>
-                {Plants.map((list,key) =>
-            
-                <div style={{padding:'10px'}}>
-                 <Shadow >
-                <Link to={`/${list.to}`}>
-                 <Poster style={{padding: '25px'}} src={`/${list.url}`} alt='no image'/>
-                 </Link>
-                 <BoxDeco>
-                 <div style={{width:'99%',textOverflow:'ellipsis',whiteSpace:'nowrap',overflow:'hidden'}}>
-                 
-                 <Link to={`${list.to}`} style={{textAlign: "center", padding: '3px',textDecoration: 'none',color: 'black'}}>{list.name} </Link>
-                 </div>
-              
-                 <div style={{paddingTop:'10px',fontSize:'16px',fontWeight:'700',color:'#fe5621'}}>
-                 <span dangerouslySetInnerHTML={{ __html: '&#8377'}}></span>
-                 {list.price}
-                 </div>
-                    <br/>
-                 <Button variant="contained" size="small" style={{backgroundColor:'#40d83d' ,textTransform:'capitalize'}} >Add To Cart</Button>
-                 </BoxDeco>
-                 </Shadow>
-                </div>
-               
-            )}
-
-        </ImageGrid>
-    )
+    render(){
+        const {Plants} = Products.PlantsList;
+        const {getProduct} = this.props
+        console.log("Plants:"+JSON.stringify(this.props))
+        return (
+            <ImageGrid>
+                    {Plants.map((list,key) =>
+                
+                    <div style={{padding:'10px'}} key={key}>
+                     <Shadow >
+                    <Link to={`${list.to}`} onClick={()=>getProduct(list.id,list)} >
+                     <Poster style={{padding: '25px'}} src={`/${list.url}`} alt='no image'/>
+                     </Link>
+                     <BoxDeco>
+                     <div style={{width:'99%',textOverflow:'ellipsis',whiteSpace:'nowrap',overflow:'hidden'}}>
+                     
+                     <Link to={`${list.to}`} style={{textAlign: "center", padding: '3px',textDecoration: 'none',color: 'black'}}>{list.name} </Link>
+                     </div>
+                  
+                     <div style={{paddingTop:'10px',fontSize:'16px',fontWeight:'700',color:'#fe5621'}}>
+                     <span dangerouslySetInnerHTML={{ __html: '&#8377'}}></span>
+                     {list.price}
+                     </div>
+                        <br/>                    
+                     <Button variant="contained" size="small" style={{backgroundColor:'#40d83d' ,textTransform:'capitalize'}} >Add To Cart</Button>
+                     </BoxDeco>
+                     </Shadow>
+                    </div>
+                   
+                )}
+    
+            </ImageGrid>
+        )
+    }
+    
 
 }
-
-export default PlantsList;
+const mapStateToProps = state =>({        
+    productItem : state.productStore.productItem
+  })
+  const mapDispatchToProps = dispatch => bindActionCreators ({    
+    getProduct
+  },dispatch)
+  
+export default connect(mapStateToProps,mapDispatchToProps)(PlantsList);
 
 const ImageGrid = styled.div`
  display:grid;
