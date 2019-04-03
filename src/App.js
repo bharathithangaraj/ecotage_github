@@ -20,6 +20,7 @@ import BodyComponent from './components/BodyComponent'
 import ImgGrid from './main/ImgGrid';
 import Page404 from './components/Page404'
 import ProductDetail from './components/ProductDetail';
+import ViewCart from './components/ViewCart';
 
 const middleware = [thunk,logger]
 const store = createStore(
@@ -35,13 +36,16 @@ state ={
 
   PlantsList :'PlantsList',
   Home : 'ImgGrid',
+  viewProduct : 'ProductDetail',
+  ViewCart : 'ViewCart'
+
   
 
 }
   
 
   render() {
-    const {Home,PlantsList} = this.state
+    const {Home,PlantsList,viewProduct,ViewCart} = this.state
     console.log(this.state.Home)
    
     return (
@@ -59,7 +63,10 @@ state ={
                 <Route  path="/Seeds/" render={(props) => <BodyComponent {...props} components={PlantsList}/>}/>
                 <Route  path="/Pots/" render={(props) => <BodyComponent {...props} components={PlantsList}/>}/>
                 <Route  path="/Soil/" render={(props) => <BodyComponent {...props} components={PlantsList}/>}/>
-                <Route  path="/ProductDetail" render={(props) => <ProductDetail  {...props} components={PlantsList}/>} />
+                
+                <Route  path="/ProductDetail" render={(props) => <BodyComponent  {...props} components={viewProduct}/>} />
+
+                <Route  path="/ViewCart" render={(props) => <BodyComponent  {...props} components={ViewCart}/>} />
                 <Route   render={() => <Page404/>} />
                
                 {/* <Route path="Plants/PlantScap" component={HomeSearchBar} />  */}

@@ -29,13 +29,14 @@ export default function(state = initialState , action) {
             ...state,
             filterProducts : data 
         }
-        case ADD_TO_CART :
+        case ADD_TO_CART :    
+        console.log("from REducer:"+JSON.stringify(state.productItem))        
             state.productInCart.push(state.productItem)
         return {
             ...state,
             productInCart : state.productInCart
         }
-        case REMOVE_FROM_CART :
+        case REMOVE_FROM_CART :            
             state.productInCart.pop(data)
         return {
             ...state,

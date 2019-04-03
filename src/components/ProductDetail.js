@@ -43,7 +43,7 @@ const mapDispatchToProps = dispatch => bindActionCreators ({
 
 export default connect(mapStateToProps,mapDispatchToProps)(ProductDetail);
 
-const Poster = styled.img`
+export const Poster = styled.img`
     box-shadow: 0 0 35px white;
     cursor:pointer;
     height: 200px;

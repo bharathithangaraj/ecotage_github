@@ -21,6 +21,8 @@ import {Tabs,Tab} from '@material-ui/core';
 import HomeMenuBar from './HomeMenuBar';
 import ImgGrid from './ImgGrid'
 import BodyComponent from '../components/BodyComponent'
+import {Link} from 'react-router-dom';
+
 
 const styles = theme => ({
   appBar : {
@@ -230,7 +232,7 @@ class HomeSearchBar extends React.Component {
               <Tabs  >
               {/* <Link style={{textDecoration:'none',color:'white'}} to={'/'}><Tab style={{minWidth:'50px'}} label="Login" /> </Link> */}
               <Tab style={{minWidth:'5%'}} label="Orders" />
-              <Tab  style={{minWidth:'5%'}} label="AddCart" />
+              <Link to='/ViewCart/' style={{textDecoration:'none', color:'white'}}><Tab  style={{minWidth:'5%'}} label="Cart"  /></Link>
               </Tabs>
            
             </div>

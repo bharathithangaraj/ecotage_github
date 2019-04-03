@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 // import Grid from '@material-ui/core/Grid';
 // import { unstable_Box as Box } from '@material-ui/core/Box';
 import Products from '../../JsonData/Products.json';
-import {getProduct} from '../../actions';
+import {getProduct,addToCart} from '../../actions';
 
 
 const styles = theme => ({
@@ -28,6 +28,11 @@ class PlantsList extends Component {
     componentDidMount(){
         
     
+    }
+    addToCartFromAll = (id,product)=>{        
+        const {getProduct,addToCart} = this.props;
+        getProduct(id,product);
+        addToCart();
     }
    
     render(){
@@ -54,7 +59,7 @@ class PlantsList extends Component {
                      {list.price}
                      </div>
                         <br/>                    
-                     <Button variant="contained" size="small" style={{backgroundColor:'#40d83d' ,textTransform:'capitalize'}} >Add To Cart</Button>
+                     <button type="button" key={key} onClick={()=>this.addToCartFromAll(list.id,list)} variant="contained"  size="small" style={{backgroundColor:'#40d83d' ,textTransform:'capitalize'}} >Add To Cart</button>
                      </BoxDeco>
                      </Shadow>
                     </div>
@@ -71,7 +76,8 @@ const mapStateToProps = state =>({
     productItem : state.productStore.productItem
   })
   const mapDispatchToProps = dispatch => bindActionCreators ({    
-    getProduct
+    getProduct,
+    addToCart
   },dispatch)
   
 export default connect(mapStateToProps,mapDispatchToProps)(PlantsList);
