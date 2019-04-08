@@ -1,0 +1,826 @@
+{
+
+    "PlantsList" : {
+        "Plants" :[
+            {
+                "id":1,
+                "name" : "Set of 3 Air Purifier n Summer Cooling Plants Pack",
+                "url":"images/airpurify/img_1.jpg",
+                "to":"/ProductDetail/Plants",
+                "price" : "500",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":2,
+                "name" : "Top 4 Air Purifier Plants for India",
+                "url":"images/airpurify/img_2.jpg",
+                "to":"/ProductDetail/Plants",
+                "price" : "500",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":3,
+                "name" : "Table Top / Office Desk Plants For Removing Indoor Toxins",
+                "url":"images/airpurify/img_3.jpg",
+                "to":"/ProductDetail/Plants/",
+                "price" : "500",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":4,
+                "name" : "Table Top / Office Desk Plants For Gift",
+                "url":"images/airpurify/img_4.jpg",
+                "to":"/ProductDetail/Plants/",
+                "price" : "500",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":5,
+                "name" : "Unity in Diversity - Independence Day Pac",
+                "url":"images/airpurify/img_5.jpg",
+                "to":"/ProductDetail/Plants/",
+                "price" : "500",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":6,
+                "name" : "Air Purifier Table Top / Office Desk Plants",
+                "url":"images/airpurify/img_6.jpg",
+                "to":"/ProductDetail/Plants/",
+                "price" : "500",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":7,
+                "name" : "True AC Table Top / Office Desk Plants",
+                "url":"images/airpurify/img_7.jpg",
+                "to":"/ProductDetail/Plants/",
+                "price" : "500",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":8,
+                "name" : "Top 3 Air Purifier Plants Pack",
+                "url":"images/airpurify/img_8.jpg",
+                "to":"/ProductDetail/Plants/",
+                "price" : "500",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":9,
+                "name" : "Low Maintenance Table Top / Office Desk Plants",
+                "url":"images/airpurify/img_9.jpg",
+                "to":"/ProductDetail/Plants/",
+                "price" : "500",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":10,
+                "name" : "Cubicle-Friendly Table Top / Office Desk Indoor Plants",
+                "url":"images/airpurify/img_10.jpg",
+                "to":"/ProductDetail/Plants/",
+                "price" : "500",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":11,
+                "name" : "NASA Recommended Table Top / Office Desk Plants",
+                "url":"images/airpurify/img_11.jpg",
+                "to":"/ProductDetail/Plants/",
+                "price" : "500",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":12,
+                "name" : "Table Top / Office Desk To Boost Productivity",
+                "url":"images/airpurify/img_12.jpg",
+                "to":"/ProductDetail/Plants/",
+                "price" : "500",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            }
+
+        ]
+    },
+    "SeedsList" :{
+        "Seeds" : [
+            {
+                "id":1,
+                "name" : "Peacock flower (Pack of 20) - Seed balls",
+                "url":"images/seeds/img_1.jpg",
+                "to":"/Seeds/ProductDetail/",
+                "price" : "199",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":2,
+                "name" : "Peela Gulmohar (Pack of 20) - Seed balls",
+                "url":"images/seeds/img_2.jpg",
+                "to":"/Seeds/ProductDetail/",
+                "price" : "199",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":3,
+                "name" : "African Tulip tree (Pack of 20) - Seed balls",
+                "url":"images/seeds/img_3.jpg",
+                "to":"/Seeds/ProductDetail/",
+                "price" : "199",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":4,
+                "name" : "Kids easy gardening, Dianthus (Pack of 20) - Seed balls",
+                "url":"images/seeds/img_4.jpg",
+                "to":"/Seeds/ProductDetail/",
+                "price" : "199",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":5,
+                "name" : "Easy gardening, Vinca (Pack of 20) - Seed balls",
+                "url":"images/seeds/img_5.jpg",
+                "to":"/Seeds/ProductDetail/",
+                "price" : "199",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":6,
+                "name" : "Kids fun gardening, Peela Gulmohar (Pack of 20) - Seed balls",
+                "url":"images/seeds/img_6.jpg",
+                "to":"/Seeds/ProductDetail/",
+                "price" : "199",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":7,
+                "name" : "Flowering seed ball kit (Make 50 seed balls)",
+                "url":"images/seeds/img_7.jpg",
+                "to":"/Seeds/ProductDetail/",
+                "price" : "199",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":8,
+                "name" : "Vegetable seed balls kit for kids learning (Make 50 balls)",
+                "url":"images/seeds/img_8.jpg",
+                "to":"/Seeds/ProductDetail/",
+                "price" : "199",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            }
+
+        ]
+    },
+    "PotsList" : {
+        "Pots" : [
+            {
+                "id":1,
+                "name" : "3 inch Grower Round Plastic Pot (Dark Pink)",
+                "url":"images/pots/normal/img_1.jpg",
+                "to":"/Pots/ProductDetail/",
+                "price" : "20",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":2,
+                "name" : "3 inch Grower Round Plastic Pot (Orange)",
+                "url":"images/pots/normal/img_2.jpg",
+                "to":"/Pots/ProductDetail/",
+                "price" : "20",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":3,
+                "name" : "3 inch Grower Round Plastic Pot (Lime Yellow)",
+                "url":"images/pots/normal/img_3.jpg",
+                "to":"/Pots/ProductDetail/",
+                "price" : "20",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":4,
+                "name" : "3 inch Grower Round Plastic Pot (Sky Blue)",
+                "url":"images/pots/normal/img_4.jpg",
+                "to":"/Pots/ProductDetail/",
+                "price" : "20",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":5,
+                "name" : "4.7 inch Chatura No. 12 Self Watering Square Plastic Planter (Red)",
+                "url":"images/pots/selfwatering/img_1.jpg",
+                "to":"/Pots/ProductDetail/",
+                "price" : "215",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":6,
+                "name" : "4.7 inch Chatura No. 12 Self Watering Square Plastic Planter (Green)",
+                "url":"images/pots/selfwatering/img_2.jpg",
+                "to":"/Pots/ProductDetail/",
+                "price" : "215",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":7,
+                "name" : "4.7 inch Chatura No. 12 Self Watering Square Plastic Planter (Yellow)",
+                "url":"images/pots/selfwatering/img_3.jpg",
+                "to":"/Pots/ProductDetail/",
+                "price" : "215",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":8,
+                "name" : "4.7 inch Chatura No. 12 Self Watering Square Plastic Planter (Coffee Color)",
+                "url":"images/pots/selfwatering/img_4.jpg",
+                "to":"/Pots/ProductDetail/",
+                "price" : "215",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":9,
+                "name" : "15.7 inch Cubo No. 40 Stone Finish Square Rotomoulded Plastic Planter (Grey)",
+                "url":"images/pots/classic/img_1.jpg",
+                "to":"/Pots/ProductDetail/",
+                "price" : "2225",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":10,
+                "name" : "15.7 inch Cubo No. 40 Stone Finish Square Rotomoulded Plastic Planter (White)",
+                "url":"images/pots/classic/img_2.jpg",
+                "to":"/Pots/ProductDetail/",
+                "price" : "2225",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":11,
+                "name" : "15.7 inch Cubo No. 40 Stone Finish Square Rotomoulded Plastic Planter (Sand Color)",
+                "url":"images/pots/classic/img_3.jpg",
+                "to":"/Pots/ProductDetail/",
+                "price" : "2225",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":12,
+                "name" : "23.2 inch Duro No. 60 Round Rotomoulded Plastic Planter (Terracotta Color)",
+                "url":"images/pots/classic/img_4.jpg",
+                "to":"/Pots/ProductDetail/",
+                "price" : "3005",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            }
+        ]
+    },
+
+    "FertilizerList" : {
+        "Fertilizers" : [
+            {
+                "id":1,
+                "name" : "Maxi grow (Flower Specialist, 10 Gm)",
+                "url":"images/Fertilize/img_1.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "14",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":2,
+                "name" : "Plant O Boost (Overall Growth Booster, 10 Gm)",
+                "url":"images/Fertilize/img_2.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "11",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":3,
+                "name" : "Plant O Boost (Special Flower Booster, 10 Gm)",
+                "url":"images/Fertilize/img_3.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "11",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":4,
+                "name" : "Toprose (Rose Plant Food, 500 Gm)",
+                "url":"images/Fertilize/img_4.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "60",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":5,
+                "name" : "Growtabbs (Soil Enricher Tablets, 100 Gm)",
+                "url":"images/Fertilize/img_5.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "60",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":6,
+                "name" : "Biogrow (All purpose organic manure, 1 Kg)",
+                "url":"images/Fertilize/img_6.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "60",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":7,
+                "name" : "Succulent Booster (12 Gm)",
+                "url":"images/Fertilize/img_7.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "60",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":8,
+                "name" : "Vermicompost - 1 Kg",
+                "url":"images/Fertilize/img_8.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "80",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":9,
+                "name" : "Garden Green (Organic Compost Soil Conditioner, 1 Kg)",
+                "url":"images/Fertilize/img_9.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "80",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":10,
+                "name" : "Nutri Boom (Odourless Granular Plant Food, 250 Gm)",
+                "url":"images/Fertilize/img_10.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "80",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":11,
+                "name" : "Coco Dung (Coconut fiber Cow dung, 1 Kg)",
+                "url":"images/Fertilize/img_11.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "100",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":12,
+                "name" : "Neem Cake - 1 Kg",
+                "url":"images/Fertilize/img_12.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "99",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":13,
+                "name" : "Sterameal - 1 Kg",
+                "url":"images/Fertilize/img_13.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "99",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+
+            {
+                "id":14,
+                "name" : "Coco peat block - 900 Gm",
+                "url":"images/Fertilize/img_14.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "99",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":15,
+                "name" : "Bone Meal Powder - 250 Gm",
+                "url":"images/Fertilize/img_15.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "99",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":16,
+                "name" : "Perlite - 250 Gm",
+                "url":"images/Fertilize/img_16.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "120",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":17,
+                "name" : "Exfoliated Vermiculite - 250 Gm",
+                "url":"images/Fertilize/img_17.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "120",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":18,
+                "name" : "Expanded Clay Aggregate (Clay Balls) - 1 Kg",
+                "url":"images/Fertilize/img_18.png",
+                "to":"/Soils/ProductDetail/",
+                "price" : "199",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":19,
+                "name" : "Pumice Stones - 1 Kg",
+                "url":"images/Fertilize/img_19.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "320",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            },
+            {
+                "id":20,
+                "name" : "Natural Dried Moss ( 0.5 Kg )",
+                "url":"images/Fertilize/img_20.jpg",
+                "to":"/Soils/ProductDetail/",
+                "price" : "270",
+                "description" : [
+                    {
+                        "height" : 100,
+                        "widht" : 10,
+                        "Life"  : 100
+                    }
+
+                ]
+            }
+
+
+
+        ]
+        
+    }
+    
+}

@@ -23,7 +23,7 @@ const styles = theme => ({
     },
   });
 
-class PlantsList extends Component {
+class PotsList extends Component {
 
     componentDidMount(){
         
@@ -36,12 +36,12 @@ class PlantsList extends Component {
     }
    
     render(){
-        const {Plants} = Products.PlantsList;
+        const {Pots} = Products.PotsList;
         const {getProduct} = this.props
         console.log("Plants:"+JSON.stringify(this.props))
         return (
             <ImageGrid>
-                    {Plants.map((list,key) =>
+                    {Pots.map((list,key) =>
                 
                     <div style={{padding:'10px'}} key={key}>
                      <Shadow >
@@ -59,12 +59,12 @@ class PlantsList extends Component {
                      {list.price}
                      </div>
                         <br/>                    
-                     <input type="submit" 
+                        <input type="submit" 
                      name='Add To Cart' value='Add To Card' 
                      title='Add To Card' 
                      key={key} onClick={()=>this.addToCartFromAll(list.id,list)} 
-                      className="addCartButton" />
-                     </BoxDeco>
+                      className="addCartButton" />                     
+                      </BoxDeco>
                      </Shadow>
                     </div>
                    
@@ -86,7 +86,7 @@ const mapStateToProps = state =>({
     addToCart
   },dispatch)
   
-export default connect(mapStateToProps,mapDispatchToProps)(PlantsList);
+export default connect(mapStateToProps,mapDispatchToProps)(PotsList);
 
 const ImageGrid = styled.div`
  display:grid;
