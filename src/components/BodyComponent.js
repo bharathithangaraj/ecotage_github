@@ -8,6 +8,8 @@ import Page404 from  './Page404'
 import ProductDetail from './ProductDetail';
 import ViewCart from './ViewCart';
 import HtmlRender from './HtmlRender'
+import SignIn from './Authentication/signin';
+
 
 class BodyComponent extends Component {
     
@@ -40,6 +42,10 @@ class BodyComponent extends Component {
             case 'HtmlRender': 
                 comp = <HtmlRender/> 
                 break;
+            case 'Signin':                 
+                comp = <SignIn/> 
+                break;
+            
             default: comp =  undefined
                 break;
         }

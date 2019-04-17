@@ -41,15 +41,15 @@ state ={
   Home : 'ImgGrid',
   viewProduct : 'ProductDetail',
   ViewCart : 'ViewCart',
-  HtmlRender : 'HtmlRender'
-
+  HtmlRender : 'HtmlRender',
+  Signin : "Signin"
   
 
 }
   
 
   render() {
-    const {Home,PlantsList,SeedsList,PotsList,SoilsList,viewProduct,ViewCart,HtmlRender} = this.state
+    const {Home,PlantsList,SeedsList,PotsList,SoilsList,viewProduct,ViewCart,HtmlRender,Signin} = this.state
     console.log(this.state.Home)
    
     return (
@@ -72,6 +72,8 @@ state ={
 
                 <Route  path="/ViewCart" render={(props) => <BodyComponent  {...props} components={ViewCart}/>} />
                 <Route  path="/HtmlRender" render={(props) => <BodyComponent  {...props} components={HtmlRender}/>} />
+
+                <Route  path="/Signin" render={(props) => <BodyComponent  {...props} components={Signin}/>} />
 
                 <Route   render={() => <Page404/>} />
                
