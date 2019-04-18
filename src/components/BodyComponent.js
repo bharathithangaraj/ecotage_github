@@ -9,6 +9,7 @@ import ProductDetail from './ProductDetail';
 import ViewCart from './ViewCart';
 import HtmlRender from './HtmlRender'
 import SignIn from './Authentication/signin';
+import Signup from './Authentication/SignUp';
 
 
 class BodyComponent extends Component {
@@ -45,7 +46,10 @@ class BodyComponent extends Component {
             case 'Signin':                 
                 comp = <SignIn/> 
                 break;
-            
+            case 'Signup':                 
+                comp = <Signup/> 
+                break;
+
             default: comp =  undefined
                 break;
         }
