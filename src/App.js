@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import {BrowserRouter as Router,Route,Switch,Link}from 'react-router-dom' 
+import {BrowserRouter as Router,Route,Switch}from 'react-router-dom' 
 
  import {createStore,applyMiddleware} from 'redux';
  import {Provider} from 'react-redux';
@@ -15,12 +15,12 @@ import {BrowserRouter as Router,Route,Switch,Link}from 'react-router-dom'
  
 import logger from 'redux-logger'
 import HomeSearchBar from './main/HomeSearchBar';
-import PlantsList from './components/Plants/PlantsList'
+// import PlantsList from './components/Plants/PlantsList'
 import BodyComponent from './components/BodyComponent'
-import ImgGrid from './main/ImgGrid';
+// import ImgGrid from './main/ImgGrid';
 import Page404 from './components/Page404'
-import ProductDetail from './components/ProductDetail';
-import ViewCart from './components/ViewCart';
+// import ProductDetail from './components/ProductDetail';
+// import ViewCart from './components/ViewCart';
 
 const middleware = [thunk,logger]
 const store = createStore(

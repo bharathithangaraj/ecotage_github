@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Avatar from '@material-ui/core/Avatar';
+// import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 // import CssBaseline from '@material-ui/core/CssBaseline';
 // import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
 // import Checkbox from '@material-ui/core/Checkbox';
 // import Input from '@material-ui/core/Input';
 // import InputLabel from '@material-ui/core/InputLabel';
-import Switch from '@material-ui/core/Switch';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+// import Switch from '@material-ui/core/Switch';
+// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -18,9 +18,9 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Visibility from '@material-ui/icons/Visibility';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import InputBase from '@material-ui/core/InputBase';
+// import MenuItem from '@material-ui/core/MenuItem';
+// import Select from '@material-ui/core/Select';
+// import InputBase from '@material-ui/core/InputBase';
 
 
 import Dialog from '@material-ui/core/Dialog';
@@ -28,10 +28,10 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import withMobileDialog from '@material-ui/core/withMobileDialog';
+// import withMobileDialog from '@material-ui/core/withMobileDialog';
 
 import IconButton from '@material-ui/core/IconButton';
-import CountryCodes from '../../JsonData/CountryCodes.json'
+// import CountryCodes from '../../JsonData/CountryCodes.json'
 
 
 
@@ -39,6 +39,9 @@ import {Link} from 'react-router-dom';
 
 // import Collapse from '@material-ui/core/Collapse';
 
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {signUpForm,verificationOTP} from '../../action/UserAction';
 
 
 
@@ -76,41 +79,6 @@ const styles = theme => ({
 
   },
 });
-const BootstrapInput = withStyles(theme => ({
-    root: {
-      'label + &': {
-        marginTop: theme.spacing.unit * 3,
-      },
-    },
-    input: {
-      borderRadius: 4,
-      position: 'relative',
-      backgroundColor: theme.palette.background.paper,
-      border: '1px solid #ced4da',
-      fontSize: 16,
-      width: 'auto',
-      padding: '10px 26px 10px 12px',
-      transition: theme.transitions.create(['border-color', 'box-shadow']),
-      // Use the system font instead of the default Roboto font.
-      fontFamily: [
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-      ].join(','),
-      '&:focus': {
-        borderRadius: 4,
-        borderColor: '#80bdff',
-        boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-      },
-    },
-  }))(InputBase);
 class Signup extends Component{
   
     state = {
@@ -159,23 +127,31 @@ class Signup extends Component{
       } 
       signUpSumbmit = (e) =>{
         this.setState({isFormSubmitted:true})
+        let formData = {email:this.state.email,
+          password:this.state.password,mobileNumber:this.state.mobileNumber};
+          this.props.signUpForm(formData)
+        // here we need to  implement the async await to send OTP to user mobile and wait for response. 
+
         e.preventDefault();
       } 
 
       handleClickOpen = (e) => {
+        let otpData = {otp:this.state.OTP}
+        this.props.verificationOTP(otpData)
+        // here we need to  implement the async await to verify the OTP
         this.setState({ open: true });
         e.preventDefault()
       };
     
       handleClose = () => {
         this.setState({ open: false });
-
+        
       };
 
 render() {
     const { classes } = this.props;
     const { fullScreen } = this.props;
-    const { checked,emailHelperText,passwordHelperText,phoneCc,mobileNumber,mobileNumberHelperText,
+    const { emailHelperText,passwordHelperText,mobileNumber,mobileNumberHelperText,
         otpHelperText,
         isFormSubmitted
      } = this.state;
@@ -249,30 +225,7 @@ render() {
             ),
             }}
         />
-        {/* <Select
-            value={this.state.phoneCc}
-            onChange={this.getCountryCode('phoneCc')}
-            input={<BootstrapInput name="age" id="age-customized-select" />}
-        >
-    
-            {CountryCodes.map(option => (
-                <MenuItem key={option.dial_code-option} value ={option} >                        
-                </MenuItem>
-            ))}            
-        </Select> */}
         
-        
-        {/* <FormControlLabel
-          control={
-            <Switch
-              checked = {checked}
-              value="checked"
-              color="primary"
-              onChange={()=>{this.setState({checked:!checked})}}
-            />
-          }
-          label="Remember Me"
-        />           */}
         <Button
             type="submit"
             fullWidth
@@ -345,7 +298,7 @@ render() {
                 <DialogTitle id="responsive-dialog-title">{"OTP Verification"}</DialogTitle>
                 <DialogContent>
                   <DialogContentText>
-                    YOur Mobile Number has been verified. Kinldy do the same for E-Mail verfication in Profile Menu. 
+                    Your Mobile Number has been verified. Kinldy do the same for E-Mail verfication in Profile Menu. 
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>            
@@ -361,8 +314,6 @@ render() {
   return (
     <main className={classes.main}>
     {isFormSubmitted?otpValidation:Signup}
-    {/* {Signup} 
-    {otpValidation}    */}
     </main>
   );
 }
@@ -371,4 +322,13 @@ Signup.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Signup);
+// export default withStyles(styles)(Signup);
+const mapStateToProps = state =>({
+  user : state.loginStore.user
+})
+const mapDispatchToProps = dispatch => bindActionCreators ({
+  signUpForm,
+  verificationOTP
+},dispatch)
+
+export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(Signup));

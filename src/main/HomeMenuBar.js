@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import HomeMenuList from './HomeMenuList';
 import { withStyles } from '@material-ui/core/styles';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-import HomeSearchBar from'./HomeSearchBar'
+// import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+
+import { Link} from 'react-router-dom';
+// import HomeSearchBar from'./HomeSearchBar'
 
 
 const styles = theme => ({

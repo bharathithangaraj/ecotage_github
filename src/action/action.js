@@ -39,3 +39,12 @@ export function buyNow(){
         })
     }
 }
+
+
+export function signIn(){
+    return function(dispatch){
+        return dispatch({
+            type : 'SIGNIN'            
+        })
+    }
+}

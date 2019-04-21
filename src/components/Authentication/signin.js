@@ -17,6 +17,11 @@ import TextField from '@material-ui/core/TextField';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import {Link} from 'react-router-dom';
 
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {loginIn} from '../../action/UserAction'
+
+
 // import Collapse from '@material-ui/core/Collapse';
 
 
@@ -58,7 +63,14 @@ const styles = theme => ({
 });
 
 class SignIn extends Component{
-  
+  componentDidMount(){
+
+  } 
+    
+  componentWillUnmount() {
+     // console.log(JSON.stringify(this.props))        
+   }
+ 
     state = {
         email : "",
         emailHelperText : "",
@@ -80,6 +92,14 @@ class SignIn extends Component{
         }else{
           this.setState({emailHelperText:''})
         }
+      }
+      loginSubmit = (e) =>{
+        console.log(JSON.stringify(this.props))
+        
+        let formData = {email:this.state.email,
+                        password:this.state.password};
+        this.props.loginIn(formData)
+        e.preventDefault();
       }
       
 render() {
@@ -142,6 +162,7 @@ render() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={this.loginSubmit}
             >
               Sign in
             </Button>            
@@ -165,4 +186,12 @@ SignIn.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SignIn);
+// export default withStyles(styles)(SignIn);
+const mapStateToProps = state =>({
+  user : state.loginStore.user
+})
+const mapDispatchToProps = dispatch => bindActionCreators ({
+  loginIn
+},dispatch)
+
+export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(SignIn));

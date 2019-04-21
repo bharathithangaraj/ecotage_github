@@ -7,7 +7,7 @@ import DescriptionData from '../JsonData/DescriptionData'
 
 
   
-import {getProduct,addToCart,buyNow} from '../actions'
+import {addToCart,buyNow} from '../action/action'
 
 class ProductDetail extends Component {
   
@@ -33,8 +33,8 @@ class ProductDetail extends Component {
           <button onClick={()=>this.props.buyNow()} >Buy Now</button> */}
           <div >
            <input type="submit" 
-                     name='Add To Cart' value='Add To Card' 
-                     title='Add To Card' 
+                     name='Add To Cart' value='Add To Cart' 
+                     title='Add To Cart' 
                       onClick={()=>this.props.addToCart()} 
                       className="addCartButton" />
                      
@@ -57,7 +57,7 @@ class ProductDetail extends Component {
             {
               console.log(list.id);
               return (
-                (list.id == productItem.id) ?
+                (list.id === productItem.id) ?
                   <div dangerouslySetInnerHTML={ {__html: PlantsDetails[0].desc} } />
                   : undefined
               )

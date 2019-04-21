@@ -1,27 +1,27 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
+// import PropTypes from 'prop-types';
+// import { withStyles } from '@material-ui/core/styles';
+// import GridList from '@material-ui/core/GridList';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 // import Grid from '@material-ui/core/Grid';
 // import { unstable_Box as Box } from '@material-ui/core/Box';
 import Products from '../../JsonData/Products.json';
-import {getProduct,addToCart} from '../../actions';
+import {getProduct,addToCart} from '../../action/action';
 
 
-const styles = theme => ({
-    button: {
-      margin: theme.spacing.unit,
-      paddingTop:'10px'
-    },
-    input: {
-      display: 'none',
-    },
-  });
+// const styles = theme => ({
+//     button: {
+//       margin: theme.spacing.unit,
+//       paddingTop:'10px'
+//     },
+//     input: {
+//       display: 'none',
+//     },
+//   });
 
 class PlantsList extends Component {
 
@@ -121,17 +121,17 @@ min-height:'0',
 float:'none'
 `
 
-const TextDeco =styled.div`
-text-align: "center";
- padding: '3px';
- text-decoration: 'none';
- color: 'black'
-`
+// const TextDeco =styled.div`
+// text-align: "center";
+//  padding: '3px';
+//  text-decoration: 'none';
+//  color: 'black'
+// `
 
-const priceDiv = styled.div`
-font-size: 16px;
-font-weight: 700;
-color: #fe5621;
-`
+// const priceDiv = styled.div`
+// font-size: 16px;
+// font-weight: 700;
+// color: #fe5621;
+// `
 
 

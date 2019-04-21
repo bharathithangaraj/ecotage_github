@@ -10,18 +10,19 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
+// import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import {Button} from '@material-ui/core';
+// import {Button} from '@material-ui/core';
 import {Tabs,Tab} from '@material-ui/core';
 import HomeMenuBar from './HomeMenuBar';
-import ImgGrid from './ImgGrid'
+// import ImgGrid from './ImgGrid'
 import BodyComponent from '../components/BodyComponent'
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 
 const styles = theme => ({
@@ -234,7 +235,12 @@ class HomeSearchBar extends React.Component {
               <Tabs  >
               {/* <Link style={{textDecoration:'none',color:'white'}} to={'/'}><Tab style={{minWidth:'50px'}} label="Login" /> </Link> */}
               <Tab style={{minWidth:'5%'}} label="Orders" />
-              <Link to='/ViewCart/' style={{textDecoration:'none', color:'white'}}><Tab  style={{minWidth:'5%'}} label="Cart"  /></Link>
+              <Link to='/ViewCart/' style={{textDecoration:'none', color:'white'}}><Tab  style={{minWidth:'5%'}} label="Cart"  />
+              <sup><Badge pill variant="success">
+                  {this.props.productInCart.length > 0 ? this.props.productInCart.length:''}
+                </Badge>
+              </sup>
+              </Link>
               </Tabs>
            
             </div>
@@ -261,4 +267,10 @@ HomeSearchBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(HomeSearchBar);
+const mapStateToProps = state =>({  
+  productInCart : state.productStore.productInCart,
+})
+
+export default connect(mapStateToProps)((withStyles(styles)(HomeSearchBar)));
+
+// export default withStyles(styles)(HomeSearchBar);

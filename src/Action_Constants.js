@@ -8,3 +8,9 @@ export const BUY_NOW = "BUY_NOW";
 // CART detail
 export const CART_ITEM_REMOVE = "CART_ITEM_REMOVE";
 export const BACK = "BACK"
+
+// user details constants
+
+export const SIGNIN = 'SIGNIN';
+export const SIGNUP = 'SIGNUP';
+export const VERIFYOTP = 'VERIFYOTP'

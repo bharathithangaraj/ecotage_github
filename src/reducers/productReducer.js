@@ -1,17 +1,20 @@
 
-import {SHOW_ALL_PRODUCT,SHOW_PRODUCT,PRODUCT_SEARCH,ADD_TO_CART,REMOVE_FROM_CART,BUY_NOW,CART_ITEM_REMOVE} from './Action_Constants';
+import {SHOW_ALL_PRODUCT,SHOW_PRODUCT,PRODUCT_SEARCH,ADD_TO_CART,REMOVE_FROM_CART,BUY_NOW,CART_ITEM_REMOVE} from '../Action_Constants';
 
-const initialState = {
+const ecoteageState = {
     // productsList : [],
     productItem : {},
     filterProducts : [],
     // isProductListLoaded : false,
     // directBuyProduct : [],
-    productInCart : []
+    productInCart : [],
+    loginInfo:{}
     
 }
-export default function(state = initialState , action) {
+
+export default function (state = ecoteageState , action) {
     const {type,data} = action
+    console.log("called here&&&&&&&&&&&:"+JSON.stringify(data))
     switch(type){
         case SHOW_ALL_PRODUCT:
         return {
@@ -51,6 +54,12 @@ export default function(state = initialState , action) {
         return {
             ...state
         }
+        case "SIGNIN" : 
+        return {
+            loginInfo:data,
+            ...state
+        }
+        
        default :
         return state
     }
