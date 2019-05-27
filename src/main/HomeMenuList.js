@@ -9,8 +9,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { withStyles } from '@material-ui/core/styles';
 import {Link} from 'react-router-dom';
-
-
+import {getPageUrl} from '../action/action';
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 
 const styles = theme => ({
   root: {
@@ -61,8 +62,8 @@ class HomeMenuList extends React.Component {
   };
 
   render() {
-    const { classes,MenuArr, MenuName } = this.props;
-     console.log(MenuArr)
+    const { classes,MenuArr, MenuName,getPageUrl } = this.props;
+     console.log("MenuArr"+MenuArr)
     const { open } = this.state;
 
     return (
@@ -96,9 +97,11 @@ class HomeMenuList extends React.Component {
                     <MenuList>
                        
                       {MenuArr.map((List) => 
-                         <Link style={{textDecoration:'none',color:'white'}} to={`/${List.to}`}>
-                            <MenuItem key={List.id}>{List.MenuItem}</MenuItem>
-                            </Link>
+                       
+                          (List.categoryName === MenuName) ?
+                          <Link style={{textDecoration:'none',color:'white'}} to={`/${List.cateUrl}/`}>
+                          <MenuItem onClick={()=>getPageUrl(List.categoryId,List.cateUrl)} key={List.categoryId}>{List.categoryType}</MenuItem>
+                          </Link> : undefined
                       )}
                     
                     </MenuList>
@@ -119,4 +122,12 @@ HomeMenuList.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(HomeMenuList);
+const mapStateToProps = state =>({        
+  categories : state.productStore.categories
+})
+const mapDispatchToProps = dispatch => bindActionCreators ({    
+  getPageUrl
+},dispatch)
+
+//export default withStyles(styles)(HomeMenuList);
+export default withStyles(styles) (connect(mapStateToProps,mapDispatchToProps)  (HomeMenuList));

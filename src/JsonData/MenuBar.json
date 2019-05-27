@@ -1,0 +1,75 @@
+[
+    {
+  "categoryDesc": "Plants",
+  "categoryList": [
+    {
+      "id": 0,
+      "itemName": "All Plants Categories >>",
+      "navigateTo": "Plants/AllPlants"
+    },
+    {
+      "id": 0,
+      "itemName": "Top 5 Plants Packs",
+      "navigateTo": "Plants/top5plantspack"
+    },
+    {
+      "id": 0,
+      "itemName": "Top 10 Plants",
+      "navigateTo": "Plants/Top10"
+    },
+    {
+      "id": 0,
+      "itemName": "Flowering Plants",
+      "navigateTo": "Plants/Flower"
+    },
+    {
+      "id": 0,
+      "itemName": "Indoor Plants",
+      "navigateTo": "Plants/Indoor"
+    }
+
+  ],
+  "categoryName": "Plants",
+  "id": 0
+},
+
+{
+    "categoryDesc": "Pots",
+    "categoryList": [
+      {
+        "id": 0,
+        "itemName": "'All Planters Categories",
+        "navigateTo": "Pots/AllPlanters"
+      },
+      {
+        "id": 0,
+        "itemName": "Standard Planters",
+        "navigateTo": "Pots/StdPlanters"
+      },
+      {
+        "id": 0,
+        "itemName": "Self Watering Planters",
+        "navigateTo": "Pots/SelfPlanters"
+      },
+      {
+        "id": 0,
+        "itemName": "Planters By Color",
+        "navigateTo": "Pots/PlantersByColor"
+      },
+      {
+        "id": 0,
+        "itemName": "Planters By Size",
+        "navigateTo": "Pots/PlantersBySize"
+      },
+      {
+        "id": 0,
+        "itemName": "Planters By Shape",
+        "navigateTo": "Pots/PlantersByShape"
+      }
+  
+    ],
+    "categoryName": "Pots",
+    "id": 0
+  }
+]
+

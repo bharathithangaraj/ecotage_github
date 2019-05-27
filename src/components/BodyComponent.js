@@ -4,10 +4,13 @@ import PlantsList from './Plants/PlantsList';
 import SeedsList from './Seeds/SeedsList';
 import PotsList from './Pots/PotsList';
 import SoilsList from './Soils/SoilsList'
-import Page404 from  './Page404'
+// import Page404 from  './Page404'
 import ProductDetail from './ProductDetail';
 import ViewCart from './ViewCart';
 import HtmlRender from './HtmlRender'
+import SignIn from './Authentication/signin';
+import Signup from './Authentication/SignUp';
+
 
 class BodyComponent extends Component {
     
@@ -40,6 +43,13 @@ class BodyComponent extends Component {
             case 'HtmlRender': 
                 comp = <HtmlRender/> 
                 break;
+            case 'Signin':                 
+                comp = <SignIn/> 
+                break;
+            case 'Signup':                 
+                comp = <Signup/> 
+                break;
+
             default: comp =  undefined
                 break;
         }

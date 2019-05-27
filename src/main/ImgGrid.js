@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
+// import { withStyles } from '@material-ui/core/styles';
+// import GridList from '@material-ui/core/GridList';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 
@@ -275,9 +275,9 @@ const ImageGrid2 = styled.div`
  background-color:white;
  margin:4%
 `
-const DivGrid = styled.div`
-display:'flex-column';
-`
+// const DivGrid = styled.div`
+// display:'flex-column';
+// `
 
 // const divGrid = styled.div`
 //     display:grid;

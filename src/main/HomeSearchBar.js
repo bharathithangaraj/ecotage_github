@@ -10,31 +10,42 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
+// import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import {Button} from '@material-ui/core';
+// import {Button} from '@material-ui/core';
 import {Tabs,Tab} from '@material-ui/core';
 import HomeMenuBar from './HomeMenuBar';
-import ImgGrid from './ImgGrid'
+// import ImgGrid from './ImgGrid'
 import BodyComponent from '../components/BodyComponent'
 import {Link} from 'react-router-dom';
-
+import {connect} from 'react-redux';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const styles = theme => ({
   appBar : {
-     //backgroundColor : '#02543e',
-   backgroundColor:'#40d83d',
+     backgroundColor : '#058541',
+   //backgroundColor:'#40d83d',
      //backgroundColor:'#4cf107',
+     //backgroundColor:'#02b909',
     
       position: 'fixed',
       top: '0',
       width: '100%',
     
  
+  },
+  padding: {
+    padding: `0 ${theme.spacing.unit * 2}px`,
+    color:'inherit',
+    opacity:0.7
+    
+  },
+  margin: {
+    margin: theme.spacing.unit * 2,
   },
   root: {
     width: '100%',
@@ -122,6 +133,11 @@ class HomeSearchBar extends React.Component {
     mobileMoreAnchorEl: null,
   };
 
+  forceUpadteHandler = () => {
+    this.forceUpdate()
+  }
+ 
+
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
@@ -159,6 +175,8 @@ class HomeSearchBar extends React.Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
+       <Link to='/Signin' style={{textDecoration:'none'}}><MenuItem onClick={this.handleMenuClose}> Signin</MenuItem></Link>
+       <Link to='/Signup' style={{textDecoration:'none'}}><MenuItem onClick={this.handleMenuClose}>Signup</MenuItem></Link>
         <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
         <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
       </Menu>
@@ -232,7 +250,26 @@ class HomeSearchBar extends React.Component {
               <Tabs  >
               {/* <Link style={{textDecoration:'none',color:'white'}} to={'/'}><Tab style={{minWidth:'50px'}} label="Login" /> </Link> */}
               <Tab style={{minWidth:'5%'}} label="Orders" />
-              <Link to='/ViewCart/' style={{textDecoration:'none', color:'white'}}><Tab  style={{minWidth:'5%'}} label="Cart"  /></Link>
+              
+             {/* <Badge   color="secondary" badgeContent={this.props.productInCart.length > 0 ? this.props.productInCart.length:''}>
+             <Link to='/ViewCart/' style={{textDecoration:'none', color:'white'}}><Tab  style={{minWidth:'5%'}} label="Cart"  /></Link>
+                </Badge> */}
+                
+              {/* <sup><Badge style={{padding:'10px', margin:'10px'}} color="secondary" badgeContent={this.props.productInCart.length > 0 ? this.props.productInCart.length:''}>
+              <Link to='/ViewCart/' style={{textDecoration:'none', color:'white'}}><Tab  style={{minWidth:'5%'}} label="Cart"  /> </Link>
+                </Badge>
+              </sup> */}
+              {/* <Badge color="secondary" badgeContent={this.props.productInCart.length > 0 ? this.props.productInCart.length:''} className={classes.margin}>
+              <Link to='/ViewCart/' style={{textDecoration:'none', color:'white'}}><Typography className={classes.padding}>Cart</Typography></Link>
+            </Badge> */}
+
+      <IconButton aria-label="Cart">
+          <Badge badgeContent={this.props.productInCart.length} color="secondary">
+          <Link to='/ViewCart/' style={{textDecoration:'none', color:'white', opacity:'0.7'}}> <ShoppingCartIcon /> </Link>
+          </Badge>
+      </IconButton>
+             
+              
               </Tabs>
            
             </div>
@@ -259,4 +296,10 @@ HomeSearchBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(HomeSearchBar);
+const mapStateToProps = state =>({  
+  productInCart : state.productStore.productInCart,
+})
+
+export default connect(mapStateToProps)((withStyles(styles)(HomeSearchBar)));
+
+// export default withStyles(styles)(HomeSearchBar);
