@@ -98,9 +98,10 @@ class HomeMenuList extends React.Component {
                        
                       {MenuArr.map((List) => 
                        
-                          (List.categoryName === MenuName) ?
-                          <Link style={{textDecoration:'none',color:'white'}} to={`/${List.cateUrl}/`}>
-                          <MenuItem onClick={()=>getPageUrl(List.categoryId,List.cateUrl)} key={List.categoryId}>{List.categoryType}</MenuItem>
+                          (List.categoryName === MenuName && List.status == 1) ?
+                          
+                          <Link style={{textDecoration:'none',color:'white'}} to={`/${List.navigateTo}/`}>
+                          <MenuItem onClick={()=>getPageUrl(List.categoryId,List.navigateTo)} key={List.categoryId}>{List.categoryType}</MenuItem>
                           </Link> : undefined
                       )}
                     

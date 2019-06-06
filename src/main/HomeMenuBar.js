@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import HomeMenuList from './HomeMenuList';
 import { withStyles } from '@material-ui/core/styles';
-import {getAllCategories} from '../action/action';
+import {getAllCategories,resetCategories} from '../action/action';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 // import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
@@ -142,13 +142,21 @@ class HomeMenuBar extends Component {
         try {
             getAllCategories();
 
-           
-            
         }catch(e) {
 		console.log(e)
 		}
  }
 
+ async componentWillUnmount() {
+  
+    const {resetCategories} = this.props;
+    try {
+       // resetCategories();
+
+    }catch(e) {
+    console.log(e)
+    }
+ }
     
 
    
@@ -185,7 +193,8 @@ const mapStateToProps = state =>({
   })
   const mapDispatchToProps = dispatch => bindActionCreators ({    
     getAllCategories,
-    getPageUrl
+    getPageUrl,
+    resetCategories
   },dispatch)
 //export default withStyles(styles) (HomeMenuBar);
 export default withStyles(styles) (connect(mapStateToProps,mapDispatchToProps)  (HomeMenuBar));

@@ -1,21 +1,11 @@
-import { func } from "prop-types";
 
-// export function getAllProducts(){
-//     console.log("getall despath");
-//     return async function(dispatch){
-//         let a = await jsonData;
-//         return dispatch({
-//             type : 'SHOW_ALL_PRODUCT',
-//             data : a
-//         })
-//     }
-// // }
+import { APP_URL,SHOW_ALL_PRODUCT_IN_CART_URL,UPDATE_CART_ITEM_QUANTITY_URL,REMOVE_CART_ITEM_QUANTITY_URL } from "../Action_Constants";
 
 export function getAllCategories() {
 
     return async function(dispatch){
         console.log("getAllCategories coming:::::::::::::")
-        const res = await fetch(`http://localhost:8080/showAllCategory`);
+        const res = await fetch(`${APP_URL}/categories`);
         const categories = await res.json();
         console.log("categories :::::::::::::"+categories)
         return dispatch({
@@ -26,10 +16,10 @@ export function getAllCategories() {
 
 }
 export function getProduct(id){
-
+    
     return async function(dispatch){
         console.log('product ID ############################'+id);
-        const res = await fetch(`http://localhost:8080/showProduct/${id}`);
+        const res = await fetch(`${APP_URL}/products/${id}`);
         const product = await res.json();
         
         return dispatch({
@@ -38,23 +28,86 @@ export function getProduct(id){
         })
     }
 }
-export function addToCart(id){
-   
-    return async function(dispatch){
-        // this.forceUpdate();
-        const res = await fetch(`http://localhost:8080/showProduct/${id}`);
-        const product = await res.json();
+export function showAllProductsInCart(userId){
+    userId = 1;
+    return async function(dispatch){                
+        const res = await fetch(SHOW_ALL_PRODUCT_IN_CART_URL+'/'+userId);
+        const cartProducts = await res.json();        
+        console.log('showAllProductsInCart');
+        console.log(cartProducts)
+        
         return dispatch({
-            type : 'ADD_TO_CART',
-            data: product
+            type : 'SHOW_PRODUCTS_IN_CART',
+            data: cartProducts
         })
     }
 }
-export function removeFromCart(productId){
-    return function(dispatch){
+export function updateProductQuantity(cartItem){
+    //userId = 1;
+    console.log("updateProductQuantity::::::::"+JSON.stringify(cartItem))
+    const settings = {
+        method: 'PUT', // or 'PUT'
+        body: JSON.stringify(cartItem), // data can be `string` or {object}!
+        headers:{
+          'Content-Type': 'application/json'
+        }
+    };
+
+    return async function(dispatch){                
+        const res = await fetch(UPDATE_CART_ITEM_QUANTITY_URL,settings);
+        const cartProducts = await res.json();  
+        console.log("cartProducts:::::::"+JSON.stringify(cartProducts));
+        if(!cartProducts || cartProducts.message !== "success"){
+            alert('Could not increase/decrease product quantity');
+        }
+        return dispatch({
+            type : 'UPDATE_CART_ITEM_QUANTITY',
+            data: cartItem//cartProducts
+        })
+    }
+}
+export function addToCart(product){
+
+    const settings = {
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(product), // data can be `string` or {object}!
+        headers:{
+          'Content-Type': 'application/json'
+        }
+    };
+   
+    return async function(dispatch){
+        // this.forceUpdate();
+        const res = await fetch(`${APP_URL}/cart/product/add/`,settings);
+        const cart = await res.json();
+        console.log('ADD_TO_CART ++++++++++')
+        console.log(JSON.stringify(cart))
+        return dispatch({
+            type : 'ADD_TO_CART',
+            data: cart
+        })
+    }
+}
+export function removeFromCart(cartItem){
+    console.log("removeFromCart::action::::::"+JSON.stringify(cartItem))
+    const settings = {
+        method: 'DELETE', // or 'PUT'
+       // body: cartItem.cartId, // data can be `string` or {object}!
+        headers:{
+          'Content-Type': 'application/json'
+        }
+    };
+
+    return async function(dispatch){                
+        const res = await fetch(REMOVE_CART_ITEM_QUANTITY_URL+`${cartItem.cartId}`,settings);
+        const cartProducts = await res.json();  
+        console.log("removeFromCart::Response:::::::"+JSON.stringify(cartProducts));
+        if(!cartProducts || cartProducts.message !== "success"){
+            alert('Could not remove the item from cart');
+        }
         return dispatch({
             type : 'REMOVE_FROM_CART',
-            data : productId
+            data: cartItem
         })
     }
 }
@@ -100,9 +153,10 @@ export function getProductDetailUrl(id, url) {
 export function getProductsByCategory(id) {
     return async function(dispatch) {
         
-        const res = await fetch(`http://localhost:8080/showCategory/${id}`);
+        const res = await fetch(`${APP_URL}/category/products/${id}`);
         const products = await res.json();
-        let prodRes = products[0].productResList;
+        let prodRes = products;
+        console.log('calling getProductsByCategory')
         console.log(prodRes)
        // const products1 =  products[0];
        // console.log(products1)
@@ -118,7 +172,7 @@ export function getProductsByCategory(id) {
 export function getAllProductsByCateName(name) {
 
     return async function(dispatch) {
-        const res = await fetch(`http://localhost:8080/showAllProducts/${name}`);
+        const res = await fetch(`${APP_URL}/showAllProducts/${name}`);
         const products = await res.json();
        // let prodRes = products[0].productResList;
        let prodRes = []
@@ -139,7 +193,7 @@ export function getTopProducts(name) {
 
     return async function(dispatch){
         console.log('getTopProducts -------------->');
-        const res = await fetch(`http://localhost:8080/showTopProducts/${name}`);
+        const res = await fetch(`${APP_URL}/showTopProducts/${name}`);
         const products = await res.json();
         console.log(products)
         return dispatch({
@@ -149,6 +203,13 @@ export function getTopProducts(name) {
 
     }
 
+}
+
+export function resetCategories() {
+    console.log('resetCategories -------------->');
+    return {
+        type:'RESET_CATEGORIES'
+    }
 }
 
 export function resetProducts(){

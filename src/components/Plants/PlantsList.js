@@ -58,10 +58,45 @@ class PlantsList extends Component {
         this.props.resetProductItem();
     }
 
-    addToCartFromAll = (id)=>{        
-        const {getProduct,addToCart} = this.props;
-        getProduct(id);
-        addToCart(id);
+    findDuplicate(productId){
+        var isDuplicate = false;
+        const {productInCart} = this.props;
+        for(var i=0;i<productInCart.length;i++){              
+            if(productInCart[i].productId === productId){
+                isDuplicate = true;
+                break;
+            }
+        }
+        return isDuplicate;
+    }
+    
+
+    addToCartFromAll = (event,product)=>{   
+        const {addToCart,productInCart} = this.props;
+        var isDuplicate = false;
+        if(productInCart.length >0 ){
+            for(var i=0;i<productInCart.length;i++){              
+                if(productInCart[i].productId === product.productId){
+                    isDuplicate = true;
+                    break;
+                }
+            }
+         
+        }
+        let cartItem = {
+            "cartId": 0,
+            "price": product.price,
+            "productId": product.productId,
+            "quantity": 1,
+            "status": product.status,
+            "userId": 1
+          }
+       // getProduct(id);
+       if(!isDuplicate){
+        addToCart(cartItem);
+        event.target.style.backgroundColor ='grey';
+       } 
+        
     }
    
     render(){
@@ -80,8 +115,8 @@ class PlantsList extends Component {
                 
                     <div style={{padding:'10px'}} key={key}>
                      <Shadow >
-                    <Link to={`/${list.navigateTo}`} onClick={()=>getProduct(list.productId)} >
-                     <Poster onClick={()=>getProductDetailUrl(list.productId,list.navigateTo)} style={{padding: '25px'}} src={`/${list.imageUrl}`} alt='no image'/>
+                    <Link to={`/${list.navigageTo}`} onClick={()=>getProduct(list.productId)} >
+                     <Poster onClick={()=>getProductDetailUrl(list.productId,list.navigageTo)} style={{padding: '25px'}} src={`/${list.productImageList[0].imageUrl}`} alt='no image'/>
                      </Link>
                      <BoxDeco>
                      <div style={{width:'99%',textOverflow:'ellipsis',whiteSpace:'nowrap',overflow:'hidden'}}>
@@ -94,11 +129,13 @@ class PlantsList extends Component {
                      {list.price}
                      </div>
                         <br/>                    
-                     <input type="submit" 
-                     name='Add To Cart' value='Add To Card' 
+                   <input type="submit" 
+                     name='Add To Cart' value='Add To Cart' 
                      title='Add To Card' 
-                     key={key} onClick={()=>this.addToCartFromAll(list.productId)} 
-                      className="addCartButton" />
+                     key={key} onClick={(event)=>this.addToCartFromAll(event,list)} 
+                      className="addCartButton" 
+                     
+                      /> 
                      </BoxDeco>
                      </Shadow>
                     </div>
@@ -120,7 +157,8 @@ const mapStateToProps = state =>({
     pageId : state.productStore.pageId,
     products :state.productStore.products,
     productDetUrl : state.productStore.productDetUrl,
-    productId :  state.productStore.productId
+    productId :  state.productStore.productId,
+    productInCart : state.productStore.productInCart
 
   })
   const mapDispatchToProps = dispatch => bindActionCreators ({    
@@ -133,6 +171,7 @@ const mapStateToProps = state =>({
     getAllProductsByCateName,
     getTopProducts,
     resetProductItem
+    
   },dispatch)
   
 export default connect(mapStateToProps,mapDispatchToProps)(PlantsList);

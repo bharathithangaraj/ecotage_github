@@ -3,17 +3,16 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import styled from 'styled-components';
-import DescriptionData from '../JsonData/DescriptionData'
+import DescriptionData from '../../JsonData/DescriptionData'
 import {Link} from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 
   
-import {addToCart,buyNow} from '../action/action'
+import {addToCart,buyNow} from '../../action/action'
 
 const styles = theme => ({
   
-<<<<<<< HEAD
   // a: { 
   //   color: 'white',
   //   textDecoration: 'none',
@@ -21,9 +20,8 @@ const styles = theme => ({
   // }
 
 });
-=======
-import {addToCart,buyNow} from '../action/action'
->>>>>>> f8e6c8f64ae8af20527c6ced5ba4ffa96c1280c4
+
+
 
 class ProductDetail extends Component {
   
@@ -34,32 +32,67 @@ class ProductDetail extends Component {
   
   }
 
+  addToCartFromAll = (event,product)=>{        
+    const {addToCart,productInCart} = this.props;
+    var isDuplicate = false;
+    
+    if(productInCart.length >0 ){
+      for(var i=0;i<productInCart.length;i++){              
+          if(productInCart[i].productId === product.productId){
+              isDuplicate = true;
+              break;
+          }
+      }
+    }
+    let cartItem = {
+        "cartId": 0,
+        "price": product.price,
+        "productId": product.productId,
+        "quantity": 1,
+        "status": product.status,
+        "userId": 1
+      }
+      if(!isDuplicate){
+    addToCart(cartItem);
+    event.target.style.backgroundColor ='grey';
+      }
+  }
+
   render() {
 	  
     const { productItem } = this.props;
     const {PlantsDetails} = DescriptionData.PlantsDetailsList;
-    console.log("herersfsf"+JSON.stringify(productItem))
-    if(!productItem) return null;
+    // console.log("herersfsf"+JSON.stringify(productItem))
+    // if(!productItem) return null;
+    //   var productImageUrl;
+    //   if(productItem.productImageList){
+    //   for(var i=0;i<productItem.productImageList.length;i++){
+    //     productImageUrl = productItem.productImageList[i].imageUrl;
+    //     JSON.stringify(productItem.productImageList[i])
+    //     break;
+    //   }
+    // }
     return (
       <div className="productWrapper">
           <div className="iamgeWrapper" style={{ width:'31%', float:'left'}}>
-          
+           
            <div className="productInfo">
+             {
+               (productItem.productImageList)?
+               productItem.productImageList.map((list,key) =>
+            <Poster src= {`/../../${list.imageUrl}`} alt="Image will display" />
+             ) :undefined
              
-            <Poster src= {"../../"+productItem.imageUrl} alt="Image will display" />
+             }
         
-            </div>   
+            </div>    
        
           <div className="buttons">
          
            <input type="submit" 
                      name='Add To Cart' value='Add To Cart' 
                      title='Add To Cart' 
-<<<<<<< HEAD
-                      onClick={()=>this.props.addToCart(productItem.productId)} 
-=======
-                      onClick={()=>this.props.addToCart()} 
->>>>>>> f8e6c8f64ae8af20527c6ced5ba4ffa96c1280c4
+                      onClick={(event)=>this.addToCartFromAll(event,productItem)} 
                       className="addCartButton" />
                 <Link to='/ViewCart/'>   
             <input type="submit" 
@@ -71,7 +104,7 @@ class ProductDetail extends Component {
               <span style={{color:'red', fontFamily:'roboto', fontSize:'12px',marginLeft:'30px'}}><b>Note:</b> The image is for reference purpose only. The actual product may vary in shape or appearance based on climate, age, height etc.</span>
             </div>
             <div className="specification" style={{width:'33%', float:'left', fontFamily:'Roboto', color:'grey'}}>
-              {productItem.specification}
+              {productItem.productDetails ? productItem.productDetails.specificaton :undefined}
               <div style={{padding:'4%',fontSize:'24px',fontWeight:'700',color:'#fe5621',fontFamily:'Roboto', textAlign:'left'}}>
                      <span dangerouslySetInnerHTML={{ __html: '&#8377'}}></span> &nbsp;&nbsp;
                      {productItem.price}
@@ -92,25 +125,11 @@ class ProductDetail extends Component {
                 </span>
               
               </div>
-            </div>
+            </div> 
           <div style={{border:"#ddd 1px solid", borderRadius:'2%', padding:'4%', margin:'2%', position:'relative', overflow:'hidden', float:'left', width:'82%', textAlign:'left', fontFamily:'roboto'}}>
-               <div dangerouslySetInnerHTML={ {__html: productItem.description} } />
-            </div>
+               <div dangerouslySetInnerHTML={ {__html: productItem.productDetails ?productItem.productDetails.description : undefined} } />
+            </div> 
 
-<<<<<<< HEAD
-=======
-            
-            })} */}
-            {PlantsDetails.map((list,key) => 
-            {
-              console.log(list.id);
-              return (
-                (list.id === productItem.id) ?
-                  <div dangerouslySetInnerHTML={ {__html: PlantsDetails[0].desc} } />
-                  : undefined
-              )
-            })}
->>>>>>> f8e6c8f64ae8af20527c6ced5ba4ffa96c1280c4
 
       </div>
     );

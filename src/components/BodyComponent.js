@@ -5,7 +5,7 @@ import SeedsList from './Seeds/SeedsList';
 import PotsList from './Pots/PotsList';
 import SoilsList from './Soils/SoilsList'
 // import Page404 from  './Page404'
-import ProductDetail from './ProductDetail';
+import ProductDetail from './Plants/ProductDetail';
 import ViewCart from './ViewCart';
 import HtmlRender from './HtmlRender'
 import SignIn from './Authentication/signin';

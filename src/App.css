@@ -111,7 +111,8 @@
 }
 
 .addCartButton {
-  background-color:#058541 ;
+  /* background-color:#058541 ; */
+  background-color: #058541;
   color: white;
   font-size: 14px;
   border:none;

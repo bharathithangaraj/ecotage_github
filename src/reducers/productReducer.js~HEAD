@@ -1,8 +1,8 @@
 
-import {SHOW_ALL_PRODUCT,SHOW_PRODUCT,PRODUCT_SEARCH,SHOW_PRODUCTS_IN_CART,ADD_TO_CART,REMOVE_FROM_CART,
-    BUY_NOW,UPDATE_CART_ITEM_QUANTITY,CART_ITEM_REMOVE,SHOW_ALL_CATEGORY,PAGE_URL,
+import {SHOW_ALL_PRODUCT,SHOW_PRODUCT,PRODUCT_SEARCH,ADD_TO_CART,REMOVE_FROM_CART,
+    BUY_NOW,CART_ITEM_REMOVE,SHOW_ALL_CATEGORY,PAGE_URL,
     SHOW_PRODUCTS_BY_CATEGORY,RESET_PRODUCTS,PRODUCT_DET_URL,SHOW_PRODUCTS_BY_CATNAME,
-    SHOW_TOP_PRODUCTS, RESET_PRODUCTITEM,RESET_CATEGORIES} from '../Action_Constants';
+    SHOW_TOP_PRODUCTS, RESET_PRODUCTITEM} from '../Action_Constants';
 
 const ecoteageState = {
     // productsList : [],
@@ -48,45 +48,20 @@ export default function (state = ecoteageState , action) {
             ...state,
             categories : data
         }
-        case SHOW_PRODUCTS_IN_CART :
-        //console.log("RRRRRRRRR:"+JSON.stringify(state))        
-        return {
-            ...state,
-            productInCart : data
-        }
         case ADD_TO_CART :    
-           state.productInCart.push(data);
+      //  console.log("from REducer:"+JSON.stringify(state.productItem))        
+           // state.productInCart.push(state.productItem)
+           state.productInCart.push(data)
         return {
             ...state,
             productInCart : state.productInCart,
-            cartCount : state.productInCart.length
+            cartCount : state.cartCount+1
         }
-        
-        case UPDATE_CART_ITEM_QUANTITY:
-       
-        var updateProductInCart = state.productInCart.map(function(o){
-            console.log("o.cartId == data.cartId::::"+o.cartId+" == "+ data.cartId+"\t")
-            console.log("o.quantity = data.quantity::::"+o.quantity+" == "+ data.quantity+"\t")
-            if(o.cartId == data.cartId){
-                o.quantity = data.quantity;
-            }
-            return o;
-            });
+        case REMOVE_FROM_CART :            
+            state.productInCart.pop(data)
         return {
             ...state,
-            productInCart: updateProductInCart
-        }
-        case REMOVE_FROM_CART :   
-        let updateProductInCart = [];
-        for(var i =0; i<state.productInCart.length; i++){
-            let cartProduct = state.productInCart[i];
-            if(cartProduct.cartId != data.cartId){
-                updateProductInCart.push(cartProduct);
-            }
-        }
-        return {
-            ...state,
-            productInCart : updateProductInCart,
+            productInCart : state.productInCart,
             cartCount : state.cartCount-1
         }
         case BUY_NOW : 
@@ -142,11 +117,6 @@ export default function (state = ecoteageState , action) {
             return {
                 ...state,
                 products: data
-            }
-        case RESET_CATEGORIES :
-            return {
-                ...state,
-                categories : []
             }
         
        default :
