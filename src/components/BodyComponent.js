@@ -7,6 +7,7 @@ import SoilsList from './Soils/SoilsList'
 // import Page404 from  './Page404'
 import ProductDetail from './Plants/ProductDetail';
 import ViewCart from './ViewCart';
+import CheckOut from './CheckOut';
 import HtmlRender from './HtmlRender'
 import SignIn from './Authentication/signin';
 import Signup from './Authentication/SignUp';
@@ -39,6 +40,9 @@ class BodyComponent extends Component {
                 break;
             case 'ViewCart': 
                 comp = <ViewCart/> 
+                break;
+            case 'CheckOut': 
+                comp = <CheckOut/> 
                 break;
             case 'HtmlRender': 
                 comp = <HtmlRender/> 

@@ -10,16 +10,25 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import TextField from '@material-ui/core/TextField';
 //import styled from 'styled-components';
 
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 
-
-class ProductList extends Component {
+class ViewCart extends Component {
   async  componentDidMount(){
 
   const { productInCart, showAllProductsInCart } = this.props;
   console.log("compononet did mount called")
   await showAllProductsInCart();
    
- } 
+ }
 
  componentDidCatch() {
  
@@ -27,6 +36,7 @@ class ProductList extends Component {
 
    
 componentWillUnmount() {
+  console.log("View cart componentWillUnmount")
   this.props.showAllProductsInCart();
 }
 
@@ -49,7 +59,7 @@ componentWillUnmount() {
     return cartMsg;
   }
   removeCart = (cart, id) => {
-    
+   
     this.props.removeFromCart(cart);
 //    const { productInCart } = this.props;
 
@@ -77,7 +87,7 @@ componentWillUnmount() {
     this.props.updateProductQuantity(cartItem)
   }
   onloadCartQuantityUpdate(cart) {
-    
+   
     let cartItem = {
       "cartId": cart.cartId,
       "price": cart.price,
@@ -89,9 +99,9 @@ componentWillUnmount() {
     this.props.updateProductQuantity(cartItem)
   }
 
-    render() {
+    render() {      
       const { productInCart, showAllProductsInCart } = this.props
-  
+      let totalPrice = 0;
       const emptyCart = (
         <span>
           <Link to='/' >
@@ -101,66 +111,84 @@ componentWillUnmount() {
           <Button component={Link} to="/" style={{ backgroundColor: '#40d83d ' }} >
             Continue Shopping
   </Button>
-  
+ 
         </span>
       )
-  
+ 
 
   if(!productInCart) return null ;
 
   console.log(JSON.stringify(productInCart))
+  {productInCart.map((list, index) => (                  
+    totalPrice =  totalPrice + Number(list.price * list.quantity)                  
+  ))}
   return (<div>
       {productInCart.length === 0 ? (
         <div id="cartView"> {emptyCart}</div>
       ) : (<span><h1 id="cartView">{this.cartMsg(productInCart)}</h1>
-        <table>
-          <tbody>
-            {productInCart.map((list, index) => (
-              <tr id={`element_${list.productId}`} >
-                <td>
-                {(list.product) ? <Poster style={{ height: '200px', margin: '4%' }} key={list.productId} src={'/'+list.product.imageUrl } alt="Image will display" /> : undefined}
-                </td>
-                <td style={{ padding: '3%' }}>
-                  <span style={{ textAlign: 'left', fontSize: '14px', fontWeight: 700, fontFamily: 'roboto' }}>{list.product ? list.product.productName : undefined}  </span>
-                </td>
-                <td>
-                  <div style={{ fontSize: '16px', fontWeight: '700', color: '#fe5621', fontFamily: 'Roboto', textAlign: 'left' }}>
-                    <span dangerouslySetInnerHTML={{ __html: '&#8377' }}></span> {list.price} &nbsp;&nbsp;
-                </div>
-                </td>
-                <td>
-                  <TextField
-                    type="number"
-                    defaultValue={list.quantity > list.product.quantity ? list.product.quantity : list.quantity}
-                    margin="normal"
-                    variant="outlined"
-                    inputProps={{ min: 1, max: list.product ? list.product.quantity : 10 }}
-                    onClick={(event) => this.updateItemQuantity(event, list)}
-                    style={{ width: '90px' }}
-                   // value={list.product ? list.quantity > list.product.quantity ? list.product.quantity : list.quantity : undefined}
-                    onBlur={this.priceCalculate(this, list.price)}
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={8}>
+          {productInCart.map((list, index) => (
+            <span>
+              <Divider variant="inset"/>           
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={4}>
+                <Poster style={{ height: '200px', margin: '4%' }} key={list.productId} src={'/'+list.product.imageUrl } alt="Image will display" />
+              </Grid>
+              <Grid item xs={12} md={3}>
+                <Typography variant="h10" >
+                    {list.product ? list.product.productName : undefined}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={1}>
+                <span dangerouslySetInnerHTML={{ __html: '&#8377' }}></span> {list.price} &nbsp;&nbsp;
+              </Grid>
+              <Grid item xs={12} md={2}>
+                <TextField
+                      type="number"
+                      defaultValue={list.quantity > list.product.quantity ? list.product.quantity : list.quantity}
+                      margin="normal"
+                      variant="outlined"
+                      inputProps={{ min: 1, max: list.product ? list.product.quantity : 10 }}
+                      onClick={(event) => this.updateItemQuantity(event, list)}
+                      style={{ width: '90px' }}
+                    // value={list.product ? list.quantity > list.product.quantity ? list.product.quantity : list.quantity : undefined}
+                      onBlur={this.priceCalculate(this, list.price)}
                   />
-
-                  {list.product ? list.quantity > list.product.quantity ? this.onloadCartQuantityUpdate(list) : undefined : undefined}
-                </td>
-                <td>
-                  <span id={`{list.productId}`}></span>
-                </td>
-                <td>
-                  <DeleteIcon onClick={(event) => this.removeCart(list, `element_${list.productId}`)} />
-                  {/* <button className="addCartButton" >Remove</button> */}
-                </td>
-                <td>
-                  =
-                </td>
-                <td>
-                  &nbsp;
-                <span dangerouslySetInnerHTML={{ __html: '&#8377' }}></span> <span id={`price_${list.cartId}`}>{list.quantity*list.price}</span>
-                </td>
-              </tr>
+              </Grid>
+              <Grid item xs={12} md={1}>
+                <DeleteIcon onClick={(event) => this.removeCart(list, `element_${list.productId}`)} />
+              </Grid>
+              <Grid item xs={12} md={1}>
+                = <span dangerouslySetInnerHTML={{ __html: '&#8377' }}></span> <span id={`price_${list.cartId}`}>{list.quantity*list.price}</span>
+              </Grid>
+            </Grid>
+            </span>
             ))}
-          </tbody>
-        </table>
+          </Grid>
+          <Grid item xs={12} md={4}>
+          <Card>
+            <CardContent>
+            <Typography  variant="h5" style={{fontWeight:'bold'}} >Summary</Typography>
+            <Divider variant="inset"  />           
+            <Grid container spacing={2}>
+                <Grid item xs={12} md={8}>       
+                Invoice Total
+                </Grid>
+                <Grid item xs={12} md={4}>
+                {totalPrice}
+               
+                   
+                </Grid>
+            </Grid>
+            </CardContent>
+            <CardActions>
+            <Link to='/CheckOut' style={{width:'100%'}}> <button className="addCartButton" style={{width:'100%'}}>Check out</button> </Link>
+            </CardActions>
+          </Card>
+          </Grid>
+        </Grid>
+       
 
         <button className="addCartButton"><Link to='/' style={{cursor:'pointer'}}>continue Shopping</Link></button>
         <button className="addCartButton">BuyNow</button>
@@ -178,4 +206,4 @@ const mapDispatchToProps = dispatch => bindActionCreators ({
   updateProductQuantity
 },dispatch)
 
-export default connect(mapStateToProps,mapDispatchToProps)(ProductList);
+export default connect(mapStateToProps,mapDispatchToProps)(ViewCart);

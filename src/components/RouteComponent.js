@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
 import BodyComponent from './BodyComponent'
 import Page404 from './Page404';
+//import CheckOut from './CheckOut';
 
 class RouteComponent extends Component {
     state ={
@@ -15,16 +16,18 @@ class RouteComponent extends Component {
         Home : 'ImgGrid',
         viewProduct : 'ProductDetail',
         ViewCart : 'ViewCart',
+        CheckOut : "CheckOut",
         HtmlRender : 'HtmlRender',
         Signin : "Signin",
         Signup : "Signup"
+       
         
       
       }
     render () {
         const {pageUrl,pageId,productDetUrl,productId} = this.props;
         const navigate = `${pageUrl}/${pageId}`
-        const {Home,PlantsList,SeedsList,PotsList,SoilsList,viewProduct,ViewCart,HtmlRender,Signin,Signup} = this.state
+        const {Home,PlantsList,SeedsList,PotsList,SoilsList,viewProduct,ViewCart,CheckOut,HtmlRender,Signin,Signup} = this.state
         console.log(this.state.Home)
             return(
                 <Switch>
@@ -43,6 +46,8 @@ class RouteComponent extends Component {
                 <Route  key={productId} exact path={`/${productDetUrl}`} render={(props) => <BodyComponent  {...props} components={viewProduct}/>} /> 
 
                 <Route key='ViewCart' exact path="/ViewCart" render={(props) => <BodyComponent  {...props} components={ViewCart}/>} />
+                <Route key='CheckOut' exact path="/CheckOut" render={(props) => <BodyComponent  {...props} components={CheckOut}/>} />
+
                 <Route  path="/HtmlRender" render={(props) => <BodyComponent  {...props} components={HtmlRender}/>} />
 
                 <Route  path="/Signin" render={(props) => <BodyComponent  {...props} components={Signin}/>} />
