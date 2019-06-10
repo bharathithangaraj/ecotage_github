@@ -7,9 +7,10 @@ import DescriptionData from '../../JsonData/DescriptionData'
 import {Link} from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
+import {Redirect,withRouter} from "react-router";
 
   
-import {addToCart,buyNow} from '../../action/action'
+import {addToCart,buyNow,addToOrders} from '../../action/action'
 
 const styles = theme => ({
   
@@ -24,6 +25,10 @@ const styles = theme => ({
 
 
 class ProductDetail extends Component {
+
+  state = {
+    quantity : 1
+  }
   
   async componentDidMount() {
     console.log("componentDidMount:"+JSON.stringify(this.props))
@@ -56,6 +61,39 @@ class ProductDetail extends Component {
     addToCart(cartItem);
     event.target.style.backgroundColor ='grey';
       }
+  }
+
+  updateQuantity = (event) => {
+    const value= event.target.value
+    this.setState({
+      quantity: value
+    });
+    
+  }
+
+  buyCurrentProduct = (product) => {
+    const {addToOrders} = this.props;
+
+    //const total = document.getElementById('totalPrice').getAttribute('value')
+    const {quantity} = this.state ;
+    console.log('quantity ------------------->'+quantity)
+    const totalPrice = product.price * quantity;
+    var orderArr = [];
+ 
+     let orderItem = {
+      "cartId": 0,
+      "orderId": 0,
+      "productId": product.productId,
+      "quantity": quantity,
+      "status": product.status,
+      "total":totalPrice ,
+      "userId": 1
+    }
+    orderArr.push(orderItem)
+  
+ 
+  addToOrders(orderArr);
+  this.props.history.push('/OrderConfirmed');
   }
 
   render() {
@@ -94,12 +132,12 @@ class ProductDetail extends Component {
                      title='Add To Cart' 
                       onClick={(event)=>this.addToCartFromAll(event,productItem)} 
                       className="addCartButton" />
-                <Link to='/ViewCart/'>   
+                 
             <input type="submit" 
                      name='Buy Now' value='Buy Now' 
                      title='Buy Now' 
-                     onClick={()=>this.props.buyNow()} 
-                      className="addCartButton" />   </Link>
+                     onClick={()=>this.buyCurrentProduct(productItem)} 
+                      className="addCartButton" />   
             </div>
               <span style={{color:'red', fontFamily:'roboto', fontSize:'12px',marginLeft:'30px'}}><b>Note:</b> The image is for reference purpose only. The actual product may vary in shape or appearance based on climate, age, height etc.</span>
             </div>
@@ -112,7 +150,7 @@ class ProductDetail extends Component {
               <div className="quantity" style={{textAlign:'left',margin:'2%'}}>
                 <span style={{fontWeight:700}}>Quantity :
                 &nbsp;&nbsp;
-                <TextField          
+                {/* <TextField          
                   type="number"
                   defaultValue="1"
                   margin="normal"
@@ -120,8 +158,17 @@ class ProductDetail extends Component {
                   inputProps={{ min: 0, max: 10 }}
                   style={{width:'90px', marginTop:'-4%'}}
                   
-                />
+                /> */}
 
+                <TextField id="quantity"
+                      type="number"
+                      defaultValue="1"
+                      margin="normal"
+                      variant="outlined"
+                      inputProps={{ min: 1, max: productItem.quantity}}
+                      onClick={(event) => this.updateQuantity(event)}
+                      style={{width:'90px', marginTop:'-4%'}}
+                  />
                 </span>
               
               </div>
@@ -141,11 +188,12 @@ const mapStateToProps = state =>({
 })
 const mapDispatchToProps = dispatch => bindActionCreators ({
   addToCart,
-  buyNow
+  buyNow,
+  addToOrders
 },dispatch)
 
 //export default connect(mapStateToProps,mapDispatchToProps)(ProductDetail);
-export default withStyles(styles) (connect(mapStateToProps,mapDispatchToProps) (ProductDetail));
+export default withStyles(styles) (connect(mapStateToProps,mapDispatchToProps) (withRouter(ProductDetail)));
 
 export const Poster = styled.img`
     box-shadow: 0 0 35px white;

@@ -19,7 +19,10 @@ class RouteComponent extends Component {
         CheckOut : "CheckOut",
         HtmlRender : 'HtmlRender',
         Signin : "Signin",
-        Signup : "Signup"
+        Signup : "Signup",
+        OrderResponse : "OrderResponse",
+        Payment : 'Checkout',
+        Payment1 : 'Checkout1'
        
         
       
@@ -27,7 +30,8 @@ class RouteComponent extends Component {
     render () {
         const {pageUrl,pageId,productDetUrl,productId} = this.props;
         const navigate = `${pageUrl}/${pageId}`
-        const {Home,PlantsList,SeedsList,PotsList,SoilsList,viewProduct,ViewCart,CheckOut,HtmlRender,Signin,Signup} = this.state
+        const {Home,PlantsList,viewProduct,
+          ViewCart,CheckOut,HtmlRender,Signin,Signup,OrderResponse,Payment,Payment1} = this.state
         console.log(this.state.Home)
             return(
                 <Switch>
@@ -47,11 +51,14 @@ class RouteComponent extends Component {
 
                 <Route key='ViewCart' exact path="/ViewCart" render={(props) => <BodyComponent  {...props} components={ViewCart}/>} />
                 <Route key='CheckOut' exact path="/CheckOut" render={(props) => <BodyComponent  {...props} components={CheckOut}/>} />
+                <Route key='OrderResponse' exact path="/OrderConfirmed" render={(props) => <BodyComponent  {...props} components={OrderResponse}/>} />
 
                 <Route  path="/HtmlRender" render={(props) => <BodyComponent  {...props} components={HtmlRender}/>} />
 
                 <Route  path="/Signin" render={(props) => <BodyComponent  {...props} components={Signin}/>} />
                 <Route  path="/Signup" render={(props) => <BodyComponent  {...props} components={Signup}/>} />
+                <Route  path="/Payment" render={(props) => <BodyComponent  {...props} components={Payment}/>} />
+                <Route  path="/Payment1" render={(props) => <BodyComponent  {...props} components={Payment1}/>} />
 
                 <Route   render={() => <Page404/>} />
                

@@ -1,5 +1,7 @@
 
-import { APP_URL,SHOW_ALL_PRODUCT_IN_CART_URL,UPDATE_CART_ITEM_QUANTITY_URL,REMOVE_CART_ITEM_QUANTITY_URL } from "../Action_Constants";
+import { APP_URL,SHOW_ALL_PRODUCT_IN_CART_URL,
+    UPDATE_CART_ITEM_QUANTITY_URL,
+    REMOVE_CART_ITEM_QUANTITY_URL,ADD_ORDER_URL,SHOW_ORDERS_URL, SHOW_ORDERS } from "../Action_Constants";
 
 export function getAllCategories() {
 
@@ -78,7 +80,8 @@ export function addToCart(product){
    
     return async function(dispatch){
         // this.forceUpdate();
-        const res = await fetch(`${APP_URL}/cart/product/add/`,settings);
+        //const res = await fetch(`${APP_URL}/cart/product/add/`,settings);
+        const res = await fetch(`http://localhost:8090/cart/product/add/`,settings);
         const cart = await res.json();
         console.log('ADD_TO_CART ++++++++++')
         console.log(JSON.stringify(cart))
@@ -222,4 +225,47 @@ export function resetProductItem(){
     return {
         type : 'RESET_PRODUCTITEM'
     }
+}
+
+export function addToOrders(products) {
+
+    const settings = {
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(products), // data can be `string` or {object}!
+        headers:{
+          'Content-Type': 'application/json'
+        }
+    };
+   
+    return async function(dispatch){
+        // this.forceUpdate();
+        const res = await fetch(`http://localhost:8090/order/new/`,settings);
+        const orders = await res.json();
+        console.log('ADD_ORDER_URL ++++++++++')
+        console.log(JSON.stringify(orders))
+        return dispatch({
+            type : 'ADD_ORDERS',
+            data: orders
+        })
+        
+        
+    }
+
+}
+
+export function getAllOrders(userId){
+    userId = 1;
+
+    return async function(dispatch){                
+        const res = await fetch(SHOW_ORDERS_URL+'/'+userId);
+        const orders = await res.json();        
+        console.log('SHOW_ORDERS_URL');
+        console.log(orders)
+        
+        return dispatch({
+            type : 'SHOW_ORDERS',
+            data: orders
+        })
+    }
+
 }

@@ -249,7 +249,7 @@ class HomeSearchBar extends React.Component {
                
               <Tabs  >
               {/* <Link style={{textDecoration:'none',color:'white'}} to={'/'}><Tab style={{minWidth:'50px'}} label="Login" /> </Link> */}
-              <Tab style={{minWidth:'5%'}} label="Orders" />
+              <Link to='/OrderConfirmed' style={{textDecoration:'none', color:'white', opacity:'9'}}> <Tab style={{minWidth:'5%'}} label="Orders" /> </Link>
               
              {/* <Badge   color="secondary" badgeContent={this.props.productInCart.length > 0 ? this.props.productInCart.length:''}>
              <Link to='/ViewCart/' style={{textDecoration:'none', color:'white'}}><Tab  style={{minWidth:'5%'}} label="Cart"  /></Link>
@@ -262,13 +262,13 @@ class HomeSearchBar extends React.Component {
               {/* <Badge color="secondary" badgeContent={this.props.productInCart.length > 0 ? this.props.productInCart.length:''} className={classes.margin}>
               <Link to='/ViewCart/' style={{textDecoration:'none', color:'white'}}><Typography className={classes.padding}>Cart</Typography></Link>
             </Badge> */}
-
+   <Link to='/ViewCart/' style={{textDecoration:'none', color:'white', opacity:'9'}}>
       <IconButton aria-label="Cart">
           <Badge badgeContent={this.props.productInCart.length} color="secondary">
-          <Link to='/ViewCart/' style={{textDecoration:'none', color:'white', opacity:'0.7'}}> <ShoppingCartIcon /> </Link>
+          <ShoppingCartIcon /> 
           </Badge>
       </IconButton>
-             
+      </Link>
               
               </Tabs>
            

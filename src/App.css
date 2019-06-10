@@ -131,3 +131,16 @@ a:link, a:visited {
   text-decoration: none;
   cursor: auto;
 }
+
+.zoom {
+ 
+  transition: transform .2s;
+ 
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  -ms-transform: scale(3); /* IE 9 */
+  -webkit-transform: scale(3); /* Safari 3-8 */
+  transform: scale(3); 
+}

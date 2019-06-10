@@ -11,7 +11,9 @@ import CheckOut from './CheckOut';
 import HtmlRender from './HtmlRender'
 import SignIn from './Authentication/signin';
 import Signup from './Authentication/SignUp';
-
+import OrderResponse from './OrderResponse';
+import PaymentCheckOut from './payment/Checkout';
+import PaymentCheckOut1 from './payment1/Checkout';
 
 class BodyComponent extends Component {
     
@@ -41,6 +43,9 @@ class BodyComponent extends Component {
             case 'ViewCart': 
                 comp = <ViewCart/> 
                 break;
+            case 'OrderResponse': 
+                comp = <OrderResponse/> 
+                break;
             case 'CheckOut': 
                 comp = <CheckOut/> 
                 break;
@@ -52,6 +57,12 @@ class BodyComponent extends Component {
                 break;
             case 'Signup':                 
                 comp = <Signup/> 
+                break;
+            case 'Checkout':                 
+                comp = <PaymentCheckOut/> 
+                break;
+            case 'Checkout1':                 
+                comp = <PaymentCheckOut1/> 
                 break;
 
             default: comp =  undefined

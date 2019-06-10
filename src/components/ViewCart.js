@@ -129,7 +129,9 @@ componentWillUnmount() {
         <Grid container spacing={2}>
           <Grid item xs={12} md={8}>
           {productInCart.map((list, index) => (
+            
             <span>
+              
               <Divider variant="inset"/>           
             <Grid container spacing={2}>
               <Grid item xs={12} md={4}>
@@ -162,7 +164,7 @@ componentWillUnmount() {
               <Grid item xs={12} md={1}>
                 = <span dangerouslySetInnerHTML={{ __html: '&#8377' }}></span> <span id={`price_${list.cartId}`}>{list.quantity*list.price}</span>
               </Grid>
-            </Grid>
+            </Grid> 
             </span>
             ))}
           </Grid>
@@ -183,7 +185,7 @@ componentWillUnmount() {
             </Grid>
             </CardContent>
             <CardActions>
-            <Link to='/CheckOut' style={{width:'100%'}}> <button className="addCartButton" style={{width:'100%'}}>Check out</button> </Link>
+            <Link to='/Payment1' style={{width:'100%'}}> <button className="addCartButton" style={{width:'100%'}}>Check out</button> </Link>
             </CardActions>
           </Card>
           </Grid>
@@ -191,7 +193,7 @@ componentWillUnmount() {
        
 
         <button className="addCartButton"><Link to='/' style={{cursor:'pointer'}}>continue Shopping</Link></button>
-        <button className="addCartButton">BuyNow</button>
+        {/* <button className="addCartButton">BuyNow</button> */}
       </span>)}
     </div>)
   }

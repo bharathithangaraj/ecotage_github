@@ -2,7 +2,7 @@
 import {SHOW_ALL_PRODUCT,SHOW_PRODUCT,PRODUCT_SEARCH,SHOW_PRODUCTS_IN_CART,ADD_TO_CART,REMOVE_FROM_CART,
     BUY_NOW,UPDATE_CART_ITEM_QUANTITY,CART_ITEM_REMOVE,SHOW_ALL_CATEGORY,PAGE_URL,
     SHOW_PRODUCTS_BY_CATEGORY,RESET_PRODUCTS,PRODUCT_DET_URL,SHOW_PRODUCTS_BY_CATNAME,
-    SHOW_TOP_PRODUCTS, RESET_PRODUCTITEM,RESET_CATEGORIES} from '../Action_Constants';
+    SHOW_TOP_PRODUCTS, RESET_PRODUCTITEM,RESET_CATEGORIES,ADD_ORDERS,SHOW_ORDERS} from '../Action_Constants';
 
 const ecoteageState = {
     // productsList : [],
@@ -18,7 +18,8 @@ const ecoteageState = {
     products : [],
     productDetUrl : {},
     productId : {},
-    cartCount : 0
+    cartCount : 0,
+    orders :[]
 
     
 }
@@ -30,8 +31,6 @@ export default function (state = ecoteageState , action) {
         case SHOW_ALL_PRODUCT:
         return {
             ...state,
-            // productsList : data,
-            // isProductListLoaded : true
         }
         case SHOW_PRODUCT :
         return {
@@ -49,7 +48,6 @@ export default function (state = ecoteageState , action) {
             categories : data
         }
         case SHOW_PRODUCTS_IN_CART :
-        //console.log("RRRRRRRRR:"+JSON.stringify(state))        
         return {
             ...state,
             productInCart : data
@@ -65,8 +63,6 @@ export default function (state = ecoteageState , action) {
         case UPDATE_CART_ITEM_QUANTITY:
        
         var updateProductInCart = state.productInCart.map(function(o){
-            console.log("o.cartId == data.cartId::::"+o.cartId+" == "+ data.cartId+"\t")
-            console.log("o.quantity = data.quantity::::"+o.quantity+" == "+ data.quantity+"\t")
             if(o.cartId == data.cartId){
                 o.quantity = data.quantity;
             }
@@ -147,6 +143,20 @@ export default function (state = ecoteageState , action) {
             return {
                 ...state,
                 categories : []
+            }
+        case ADD_ORDERS :
+        
+       // state.orders.push(data);
+            return  {
+                ...state,
+                orders : data
+            }
+        case SHOW_ORDERS :
+    
+        // state.orders.push(data);
+            return  {
+                ...state,
+                orders : data
             }
         
        default :

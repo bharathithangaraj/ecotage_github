@@ -71,10 +71,14 @@ class PlantsList extends Component {
     }
     
 
-    addToCartFromAll = (event,product)=>{   
+    addToCartFromAll = (event,product)=>{  
+        if(product.quantity === 0) {
+            event.target.style.backgroundColor ='grey';
+            return
+        } 
         const {addToCart,productInCart} = this.props;
         var isDuplicate = false;
-        if(productInCart.length >0 ){
+        if(productInCart.length > 0 ){
             for(var i=0;i<productInCart.length;i++){              
                 if(productInCart[i].productId === product.productId){
                     isDuplicate = true;
@@ -103,11 +107,6 @@ class PlantsList extends Component {
         //const {Plants} = Products.PlantsList;
         const {getProduct,getPageUrl,pageUrl,pageId,products,
             resetProducts,getProductDetailUrl,productDetUrl,productId} = this.props
-       
-        console.log('products from db -------------------------------')
-        console.log(products)
-       
-        console.log("Plants:"+JSON.stringify(this.props))
         return (
             <ImageGrid>
                     
@@ -130,11 +129,12 @@ class PlantsList extends Component {
                      </div>
                         <br/>                    
                    <input type="submit" 
-                     name='Add To Cart' value='Add To Cart' 
-                     title='Add To Card' 
+                     name={list.quantity === 0 ? 'Sold Out' :'Add To Cart'} value={list.quantity === 0 ? 'Sold Out' :'Add To Cart'} 
+                     title={list.quantity === 0 ? 'Stocks Not Available' :'Add To Cart'} 
                      key={key} onClick={(event)=>this.addToCartFromAll(event,list)} 
                       className="addCartButton" 
-                     
+                      
+                      style = {{backgroundColor:list.quantity ===0 ?'grey':'#058541'}}
                       /> 
                      </BoxDeco>
                      </Shadow>
