@@ -37,7 +37,11 @@ class ProductDetail extends Component {
   
   }
 
-  addToCartFromAll = (event,product)=>{        
+  addToCartFromAll = (event,product)=>{
+    if(product.quantity === 0) {
+      event.target.style.backgroundColor ='grey';
+      return
+    }         
     const {addToCart,productInCart} = this.props;
     var isDuplicate = false;
     
@@ -100,16 +104,7 @@ class ProductDetail extends Component {
 	  
     const { productItem } = this.props;
     const {PlantsDetails} = DescriptionData.PlantsDetailsList;
-    // console.log("herersfsf"+JSON.stringify(productItem))
-    // if(!productItem) return null;
-    //   var productImageUrl;
-    //   if(productItem.productImageList){
-    //   for(var i=0;i<productItem.productImageList.length;i++){
-    //     productImageUrl = productItem.productImageList[i].imageUrl;
-    //     JSON.stringify(productItem.productImageList[i])
-    //     break;
-    //   }
-    // }
+    
     return (
       <div className="productWrapper">
           <div className="iamgeWrapper" style={{ width:'31%', float:'left'}}>
@@ -128,16 +123,20 @@ class ProductDetail extends Component {
           <div className="buttons">
          
            <input type="submit" 
-                     name='Add To Cart' value='Add To Cart' 
-                     title='Add To Cart' 
+                     name={productItem.quantity === 0 ? 'Sold Out' :'Add To Cart'} value={productItem.quantity === 0 ? 'Sold Out' :'Add To Cart'} 
+                     title={productItem.quantity === 0 ? 'Stocks Not Available' :'Add To Cart'}  
                       onClick={(event)=>this.addToCartFromAll(event,productItem)} 
-                      className="addCartButton" />
-                 
-            <input type="submit" 
-                     name='Buy Now' value='Buy Now' 
-                     title='Buy Now' 
-                     onClick={()=>this.buyCurrentProduct(productItem)} 
-                      className="addCartButton" />   
+                      className="addCartButton" 
+                      style = {{backgroundColor:productItem.quantity ===0 ?'grey':'#058541'}}
+                    />
+              {productItem.quantity > 0 ?
+               <input type="submit" 
+               name='Buy Now' value='Buy Now' 
+               title='Buy Now' 
+               onClick={()=>this.buyCurrentProduct(productItem)} 
+                className="addCartButton" />   : undefined
+              }  
+           
             </div>
               <span style={{color:'red', fontFamily:'roboto', fontSize:'12px',marginLeft:'30px'}}><b>Note:</b> The image is for reference purpose only. The actual product may vary in shape or appearance based on climate, age, height etc.</span>
             </div>

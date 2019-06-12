@@ -14,6 +14,7 @@ import {bindActionCreators} from 'redux'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { getUserDetail} from '../../action/UserAction'
 
 const useStyles = makeStyles => (theme => ({
     listItem: {
@@ -31,8 +32,9 @@ class Review extends Component {
 
     async  componentDidMount(){
 
-        const { showAllProductsInCart } = this.props;
+        const { showAllProductsInCart,getUserDetail } = this.props;
         await showAllProductsInCart();
+        await getUserDetail('bharathigragaraj');
          
        }
       
@@ -43,6 +45,7 @@ class Review extends Component {
          
       componentWillUnmount() {
         this.props.showAllProductsInCart();
+        this.props.getUserDetail('bharathigragaraj');
       }
 
     continue = e => {
@@ -56,15 +59,20 @@ class Review extends Component {
     }
 
     confirmOrder = (event,products) => {
-        const {addToOrders} = this.props;
+        const {addToOrders,values} = this.props;
        
        const total = document.getElementById('totalPrice').getAttribute('value')
        var orderArr = [];
        var parseTotal = parseFloat(total);
         for(var i=0;i<products.length;i++){
            let orderItem = {
+            "cardHolderName" : values.nameOnCard,
+            "cardNo" : values.cardNumber,
             "cartId": products[i].cartId,
+            "cvv":values.cvv,
+            "expDate":values.values,
             "orderId": 0,
+            "paymentType":'CARD',
             "productId": products[i].productId,
             "quantity": products[i].quantity,
             "status": 1,
@@ -80,7 +88,7 @@ class Review extends Component {
 
     render() {
         const classes = useStyles();
-        const {handleChange,values,productInCart} = this.props;
+        const {handleChange,values,productInCart,logininfo} = this.props;
 
         let totalPrice = 0;
      
@@ -122,10 +130,10 @@ class Review extends Component {
                 <Typography variant="h6" gutterBottom className={classes.title}>
                     Shipping
                 </Typography>
-                <Typography gutterBottom>{values.firstName}</Typography>
-                <Typography gutterBottom>{values.addressline1} {values.addressline2}</Typography>
-                <Typography gutterBottom>{values.city} {values.zip}</Typography>
-                <Typography gutterBottom>{values.state} {values.country}</Typography>
+                <Typography gutterBottom>{values.firstName === ''?logininfo.firstName :values.firstName}</Typography>
+                <Typography gutterBottom>{values.addressline1 === ''?logininfo.showUserDetails.address1 : values.addressline1} {values.addressline2 ===''?logininfo.showUserDetails.address2 :values.addressline2}</Typography>
+                <Typography gutterBottom>{values.city ==='' ?logininfo.showUserDetails.city:values.city} <b>:</b> {values.zip ==='' ? logininfo.showUserDetails.zip :values.zip}</Typography>
+                <Typography gutterBottom>{values.state === '' ? logininfo.showUserDetails.state:values.state} {values.country}</Typography>
                 </Grid>
 
 
@@ -191,11 +199,13 @@ const styles = {
 }
 
 const mapStateToProps = state =>({
-    productInCart : state.productStore.productInCart
+    productInCart : state.productStore.productInCart,
+    logininfo : state.loginStore.logininfo
 })
 const mapDispatchToProps = dispatch => bindActionCreators ({
     showAllProductsInCart,
-    addToOrders
+    addToOrders,
+    getUserDetail
 },dispatch)
 
 export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Review));

@@ -1,4 +1,5 @@
 export const APP_URL = 'http://localhost:8090'
+export const PAYMENT_URL = 'http://localhost:8098'
 
 export const PRODUCT_SEARCH  = "PRODUCT_SEARCH";
 export const SHOW_ALL_PRODUCT = "SHOW_ALL_PRODUCT"; 
@@ -19,6 +20,7 @@ export const SHOW_ORDERS = 'SHOW_ORDERS';
 
 export const SIGNIN = 'SIGNIN';
 export const SIGNUP = 'SIGNUP';
+export const USERINFO = 'USERINFO';
 export const VERIFYOTP = 'VERIFYOTP';
 export const PAGE_URL = 'PAGE_URL';
 export const SHOW_PRODUCTS_BY_CATEGORY = "SHOW_PRODUCTS_BY_CATEGORY";
@@ -34,5 +36,6 @@ export const ADD_ORDERS = 'ADD_ORDERS';
 export const SHOW_ALL_PRODUCT_IN_CART_URL = APP_URL+'/cart/products/';
 export const UPDATE_CART_ITEM_QUANTITY_URL = APP_URL+'/cart/product/update/';
 export const REMOVE_CART_ITEM_QUANTITY_URL = APP_URL+'/cart/product/remove/';
-export const ADD_ORDER_URL = APP_URL+'/oder/new/';
+export const ADD_ORDER_URL = PAYMENT_URL+'/payment/add/';
 export const SHOW_ORDERS_URL = APP_URL+'/order/products';
+export const SHOW_USERS_URL = APP_URL+"/Users/";

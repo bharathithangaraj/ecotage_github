@@ -1,5 +1,5 @@
 
-import {SIGNIN,SIGNUP,VERIFYOTP} from '../Action_Constants';
+import {SIGNIN,SIGNUP,VERIFYOTP,USERINFO} from '../Action_Constants';
 
 const loginState = {
     logininfo:{},
@@ -25,6 +25,11 @@ export default function (state = loginState , action) {
             otpNumber:data,
             ...state
         }
+        case USERINFO :
+            return {
+                ...state,
+                logininfo : data
+            }
        default :
         return state
     }

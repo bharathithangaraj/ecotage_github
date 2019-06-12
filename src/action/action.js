@@ -227,6 +227,34 @@ export function resetProductItem(){
     }
 }
 
+// export function addToOrders(products) {
+
+//     const settings = {
+//         method: 'POST', // or 'PUT'
+//         body: JSON.stringify(products), // data can be `string` or {object}!
+//         headers:{
+//           'Content-Type': 'application/json'
+//         }
+//     };
+   
+//     return async function(dispatch){
+//         // this.forceUpdate();
+//         const res = await fetch(`http://localhost:8090/order/new/`,settings);
+//         const orders = await res.json();
+//         console.log('ADD_ORDER_URL ++++++++++')
+//         console.log(JSON.stringify(orders))
+//         return dispatch({
+//             type : 'ADD_ORDERS',
+//             data: orders
+//         })
+        
+        
+//     }
+
+// }
+
+
+
 export function addToOrders(products) {
 
     const settings = {
@@ -239,7 +267,7 @@ export function addToOrders(products) {
    
     return async function(dispatch){
         // this.forceUpdate();
-        const res = await fetch(`http://localhost:8090/order/new/`,settings);
+        const res = await fetch(`http://localhost:8098/payment/add/`,settings);
         const orders = await res.json();
         console.log('ADD_ORDER_URL ++++++++++')
         console.log(JSON.stringify(orders))
@@ -252,6 +280,9 @@ export function addToOrders(products) {
     }
 
 }
+
+
+
 
 export function getAllOrders(userId){
     userId = 1;

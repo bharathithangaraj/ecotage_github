@@ -1,3 +1,6 @@
+import { func } from "prop-types";
+import {SHOW_USERS_URL,APP_URL} from "../Action_Constants";
+
 export function loginIn(loginInfo){
     console.log("loginIn method called")
     return async function(dispatch){
@@ -25,4 +28,21 @@ export function verificationOTP(otp){
             data : otp 
         })
     }
+}
+
+export function getUserDetail(loginId) {
+
+    return async function(dispatch){
+        console.log('getUserDetail -------------->');
+        const res = await fetch(`${APP_URL}/Users/${loginId}`);
+        const users = await res.json();
+        console.log('users &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
+        console.log(users)
+        return dispatch({
+            type: 'USERINFO',
+            data: users
+        })
+
+    }
+
 }

@@ -63,6 +63,7 @@ state ={
       <Provider store={store}>
       <Router>
         <div className='App'>
+          
             <HomeSearchBar />
             {/* <ImgGrid/> */}
             <RouteComponent />

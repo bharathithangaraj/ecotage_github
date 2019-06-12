@@ -6,14 +6,13 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-// import Button from '@material-ui/core/Button';
-// import Grid from '@material-ui/core/Grid';
-// import { unstable_Box as Box } from '@material-ui/core/Box';
-//import Products from '../../JsonData/Products.json';
+import {Redirect,withRouter} from "react-router";
 import {getProduct,addToCart,getPageUrl,
     getProductsByCategory,resetProducts,getProductDetailUrl,
-    getAllProductsByCateName,getTopProducts,resetProductItem} from '../../action/action';
-//import { SHOW_PRODUCT } from '../../Action_Constants.js';
+    getAllProductsByCateName,getTopProducts,resetProductItem,showAllProductsInCart,productInCart} from '../../action/action';
+
+
+    //import { SHOW_PRODUCT } from '../../Action_Constants.js';
 
 
 // const styles = theme => ({
@@ -30,9 +29,11 @@ import {getProduct,addToCart,getPageUrl,
 
 class PlantsList extends Component {
 
+    
+
     async componentDidMount(){
         
-        const {getProductsByCategory,getAllProductsByCateName,pageUrl,getTopProducts,pageId} = this.props;
+        const {getProductsByCategory,getAllProductsByCateName,pageUrl,getTopProducts,pageId,showAllProductsInCart,productInCart} = this.props;
         if(pageUrl.includes('AllPlants')){
             getAllProductsByCateName('Plants')
         } 
@@ -48,14 +49,23 @@ class PlantsList extends Component {
         else {
             getProductsByCategory(pageId)
         }
+
+       
+  console.log("compononet did mount called")
+  await showAllProductsInCart();
         
     
+    }
+
+    componentDidCatch() {
+ 
     }
 
     async componentWillUnmount() {
         
         this.props.resetProducts();
         this.props.resetProductItem();
+        this.props.showAllProductsInCart();
     }
 
     findDuplicate(productId){
@@ -82,6 +92,7 @@ class PlantsList extends Component {
             for(var i=0;i<productInCart.length;i++){              
                 if(productInCart[i].productId === product.productId){
                     isDuplicate = true;
+                    event.target.style.backgroundColor ='grey';
                     break;
                 }
             }
@@ -99,18 +110,22 @@ class PlantsList extends Component {
        if(!isDuplicate){
         addToCart(cartItem);
         event.target.style.backgroundColor ='grey';
+        
        } 
         
     }
    
     render(){
         //const {Plants} = Products.PlantsList;
+        var arr = []
         const {getProduct,getPageUrl,pageUrl,pageId,products,
-            resetProducts,getProductDetailUrl,productDetUrl,productId} = this.props
+            resetProducts,getProductDetailUrl,productDetUrl,productId,productInCart} = this.props
         return (
             <ImageGrid>
                     
                     {products.map((list,key) =>
+
+                    
                 
                     <div style={{padding:'10px'}} key={key}>
                      <Shadow >
@@ -127,22 +142,27 @@ class PlantsList extends Component {
                      <span dangerouslySetInnerHTML={{ __html: '&#8377'}}></span>
                      {list.price}
                      </div>
-                        <br/>                    
+                        <br/>  
+
+                      
+
                    <input type="submit" 
                      name={list.quantity === 0 ? 'Sold Out' :'Add To Cart'} value={list.quantity === 0 ? 'Sold Out' :'Add To Cart'} 
                      title={list.quantity === 0 ? 'Stocks Not Available' :'Add To Cart'} 
                      key={key} onClick={(event)=>this.addToCartFromAll(event,list)} 
                       className="addCartButton" 
                       
-                      style = {{backgroundColor:list.quantity ===0 ?'grey':'#058541'}}
+                      style = {{backgroundColor:  list.quantity ===0 ?'grey':'#058541'}}
+                     // style = {{backgroundColor:  arr.length > 0 ?'grey':'#058541'}}
                       /> 
+
+                     
                      </BoxDeco>
                      </Shadow>
                     </div>
                    
                 )}
                    
-    
             </ImageGrid>
         )
     }
@@ -170,11 +190,12 @@ const mapStateToProps = state =>({
     getProductDetailUrl,
     getAllProductsByCateName,
     getTopProducts,
-    resetProductItem
+    resetProductItem,
+    showAllProductsInCart
     
   },dispatch)
   
-export default connect(mapStateToProps,mapDispatchToProps)(PlantsList);
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(PlantsList));
 
 const ImageGrid = styled.div`
  display:grid;

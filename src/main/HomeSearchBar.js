@@ -131,7 +131,10 @@ class HomeSearchBar extends React.Component {
   state = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
+    
   };
+
+  
 
   forceUpadteHandler = () => {
     this.forceUpdate()
@@ -161,7 +164,7 @@ class HomeSearchBar extends React.Component {
 
   render() {
     const { anchorEl, mobileMoreAnchorEl } = this.state;
-    const { classes } = this.props;
+    const { classes,productInCart } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const accountOpen = Boolean(anchorEl);
@@ -264,7 +267,7 @@ class HomeSearchBar extends React.Component {
             </Badge> */}
    <Link to='/ViewCart/' style={{textDecoration:'none', color:'white', opacity:'9'}}>
       <IconButton aria-label="Cart">
-          <Badge badgeContent={this.props.productInCart.length} color="secondary">
+          <Badge badgeContent={productInCart.length} color="secondary">
           <ShoppingCartIcon /> 
           </Badge>
       </IconButton>

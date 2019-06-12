@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux'
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -14,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
+import { getUserDetail} from '../../action/UserAction'
 
 const useStyles = makeStyles => (theme => ({
     appBar: {
@@ -54,7 +56,31 @@ const useStyles = makeStyles => (theme => ({
   }));
 
 class Checkout extends Component {
+
+  async  componentDidMount(){
+
+    const { getUserDetail,logininfo } = this.props;
+    await getUserDetail('bharathigragaraj');
+    const {firstName} = this.state;
+    console.log("logininfo   ------------>");
+    console.log(logininfo.firstName)
+    this.setState({firstName : logininfo.firstName})
+
+     
+   }
+  
+   componentDidCatch() {
+   
+  }
+  
+     
+  componentWillUnmount() {
+    this.props.getUserDetail('bharathigragaraj');
+  }
+
+  
     state = {  
+        
         step : 0,
         firstName : '',
         lastName : '',
@@ -197,4 +223,11 @@ class Checkout extends Component {
     }
 }
 
-export default Checkout;
+const mapStateToProps = state =>({
+  logininfo : state.loginStore.logininfo
+})
+const mapDispatchToProps = dispatch => bindActionCreators ({
+  getUserDetail
+},dispatch)
+
+export default connect(mapStateToProps,mapDispatchToProps)(Checkout);
