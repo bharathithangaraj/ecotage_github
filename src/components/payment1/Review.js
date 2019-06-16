@@ -14,7 +14,7 @@ import {bindActionCreators} from 'redux'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { getUserDetail} from '../../action/UserAction'
+import { getUserDetail,addUserDetails} from '../../action/UserAction'
 
 const useStyles = makeStyles => (theme => ({
     listItem: {
@@ -64,11 +64,35 @@ class Review extends Component {
     }
 
     confirmOrder = (event,products) => {
-        const {addToOrders,values,logininfo} = this.props;
+
+
+        const {addToOrders,values,logininfo,addUserDetails} = this.props;
         if(logininfo.userId == null) {
             this.props.history.push("/Signin")
             return
         }
+
+        let userdetailInfo = {
+           
+                "address1": values.addressline1,
+                "address2": values.addressline2,
+                "addressType": "OFFICE",
+                "city": values.city,
+                "country": values.country,
+                "firstName": values.firstName,
+                "gender": "MALE",
+                "houseNo": "1/24",
+                "landMark":values.city,
+                "lastName": values.lastName,
+                "location": values.city,
+                "pincode": parseInt(values.zip),
+                "state": values.state,
+                "token": logininfo.token,
+                "userId": logininfo.userId
+             
+          }
+
+          addUserDetails(userdetailInfo)  
        
        const total = document.getElementById('totalPrice').getAttribute('value')
        var orderArr = [];
@@ -215,7 +239,8 @@ const mapStateToProps = state =>({
 const mapDispatchToProps = dispatch => bindActionCreators ({
     showAllProductsInCart,
     addToOrders,
-    getUserDetail
+    getUserDetail,
+    addUserDetails
 },dispatch)
 
 export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Review));

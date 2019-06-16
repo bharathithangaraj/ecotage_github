@@ -49,6 +49,32 @@ export function signUpForm(signUpInfo){
     }
 }
 
+
+
+export function addUserDetails(userDetail){
+    console.log(userDetail)
+    const settings = {
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(userDetail), // data can be `string` or {object}!
+        headers:{
+          'Content-Type': 'application/json'
+        }
+    };
+    console.log("signup method called")
+    return async function(dispatch){
+
+        const res = await fetch(`http://localhost:8090/UserDetails/add/`,settings);
+        const addUserDlts = await res.json();
+        console.log('SIGNUP ++++++++++')
+        console.log(JSON.stringify(addUserDlts))
+        // return dispatch({
+        //     type : 'SIGNUP',
+        //     data : singUpres 
+        // })
+    }
+}
+
+
 export function verificationOTP(otp){    
     return async function(dispatch){
         return dispatch({
