@@ -33,7 +33,7 @@ class PlantsList extends Component {
 
     async componentDidMount(){
         
-        const {getProductsByCategory,getAllProductsByCateName,pageUrl,getTopProducts,pageId,showAllProductsInCart,productInCart} = this.props;
+        const {getProductsByCategory,getAllProductsByCateName,pageUrl,getTopProducts,pageId,showAllProductsInCart,productInCart,logininfo} = this.props;
         if(pageUrl.includes('AllPlants')){
             getAllProductsByCateName('Plants')
         } 
@@ -52,7 +52,10 @@ class PlantsList extends Component {
 
        
   console.log("compononet did mount called")
-  await showAllProductsInCart();
+        if(logininfo.userId != null) {
+            await showAllProductsInCart(logininfo.userId);
+        }
+     
         
     
     }
@@ -65,7 +68,10 @@ class PlantsList extends Component {
         
         this.props.resetProducts();
         this.props.resetProductItem();
-        this.props.showAllProductsInCart();
+        if(this.props.logininfo.userId != null) {
+            this.props.showAllProductsInCart(this.props.logininfo.userId);
+        }
+        
     }
 
     findDuplicate(productId){
@@ -82,11 +88,17 @@ class PlantsList extends Component {
     
 
     addToCartFromAll = (event,product)=>{  
+
         if(product.quantity === 0) {
             event.target.style.backgroundColor ='grey';
             return
         } 
-        const {addToCart,productInCart} = this.props;
+        const {addToCart,productInCart,logininfo} = this.props;
+        if(logininfo.userId == null){
+            this.props.history.push("/Signin")
+            return
+        }
+
         var isDuplicate = false;
         if(productInCart.length > 0 ){
             for(var i=0;i<productInCart.length;i++){              
@@ -104,7 +116,7 @@ class PlantsList extends Component {
             "productId": product.productId,
             "quantity": 1,
             "status": product.status,
-            "userId": 1
+            "userId": logininfo.userId
           }
        // getProduct(id);
        if(!isDuplicate){
@@ -178,7 +190,8 @@ const mapStateToProps = state =>({
     products :state.productStore.products,
     productDetUrl : state.productStore.productDetUrl,
     productId :  state.productStore.productId,
-    productInCart : state.productStore.productInCart
+    productInCart : state.productStore.productInCart,
+    logininfo:state.loginStore.logininfo
 
   })
   const mapDispatchToProps = dispatch => bindActionCreators ({    

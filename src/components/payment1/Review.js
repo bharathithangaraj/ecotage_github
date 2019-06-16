@@ -32,10 +32,12 @@ class Review extends Component {
 
     async  componentDidMount(){
 
-        const { showAllProductsInCart,getUserDetail } = this.props;
-        await showAllProductsInCart();
-        await getUserDetail('bharathigragaraj');
-         
+        const { showAllProductsInCart,getUserDetail,logininfo } = this.props;
+        if(logininfo.userId != null) {
+            await showAllProductsInCart(logininfo.userId);
+            await getUserDetail(logininfo.userName);
+        }
+       
        }
       
        componentDidCatch() {
@@ -44,8 +46,11 @@ class Review extends Component {
       
          
       componentWillUnmount() {
-        this.props.showAllProductsInCart();
-        this.props.getUserDetail('bharathigragaraj');
+          if(this.props.logininfo.userId != null) {
+            this.props.showAllProductsInCart(this.props.logininfo.userId);
+            this.props.getUserDetail(this.props.logininfo.userName);
+          }
+       
       }
 
     continue = e => {
@@ -59,7 +64,11 @@ class Review extends Component {
     }
 
     confirmOrder = (event,products) => {
-        const {addToOrders,values} = this.props;
+        const {addToOrders,values,logininfo} = this.props;
+        if(logininfo.userId == null) {
+            this.props.history.push("/Signin")
+            return
+        }
        
        const total = document.getElementById('totalPrice').getAttribute('value')
        var orderArr = [];
@@ -77,7 +86,7 @@ class Review extends Component {
             "quantity": products[i].quantity,
             "status": 1,
             "total":parseTotal ,
-            "userId": 1
+            "userId": logininfo.userId
           }
           orderArr.push(orderItem)
         }
@@ -88,7 +97,7 @@ class Review extends Component {
 
     render() {
         const classes = useStyles();
-        const {handleChange,values,productInCart,logininfo} = this.props;
+        const {handleChange,values,productInCart,userDetail} = this.props;
 
         let totalPrice = 0;
      
@@ -130,10 +139,10 @@ class Review extends Component {
                 <Typography variant="h6" gutterBottom className={classes.title}>
                     Shipping
                 </Typography>
-                <Typography gutterBottom>{values.firstName === ''?logininfo.firstName :values.firstName}</Typography>
-                <Typography gutterBottom>{values.addressline1 === ''?logininfo.showUserDetails.address1 : values.addressline1} {values.addressline2 ===''?logininfo.showUserDetails.address2 :values.addressline2}</Typography>
-                <Typography gutterBottom>{values.city ==='' ?logininfo.showUserDetails.city:values.city} <b>:</b> {values.zip ==='' ? logininfo.showUserDetails.zip :values.zip}</Typography>
-                <Typography gutterBottom>{values.state === '' ? logininfo.showUserDetails.state:values.state} {values.country}</Typography>
+                <Typography gutterBottom>{values.firstName === ''?userDetail.firstName :values.firstName}</Typography>
+                <Typography gutterBottom>{values.addressline1 === ''?userDetail.showUserDetails.address1 : values.addressline1} {values.addressline2 ===''?userDetail.showUserDetails.address2 :values.addressline2}</Typography>
+                <Typography gutterBottom>{values.city ==='' ?userDetail.showUserDetails.city:values.city} <b>:</b> {values.zip ==='' ? userDetail.showUserDetails.zip :values.zip}</Typography>
+                <Typography gutterBottom>{values.state === '' ? userDetail.showUserDetails.state:values.state} {values.country}</Typography>
                 </Grid>
 
 
@@ -200,7 +209,8 @@ const styles = {
 
 const mapStateToProps = state =>({
     productInCart : state.productStore.productInCart,
-    logininfo : state.loginStore.logininfo
+    logininfo : state.loginStore.logininfo,
+    userDetail : state.loginStore.userDetail
 })
 const mapDispatchToProps = dispatch => bindActionCreators ({
     showAllProductsInCart,

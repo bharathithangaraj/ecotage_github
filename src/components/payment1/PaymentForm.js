@@ -90,6 +90,7 @@ class PaymentForm extends Component {
               onChange={handleChange('cvv')}
               defaultValue={values.cvv}
               error={values.cvvText}
+              type='password'
             />
           </Grid>
           <Grid item xs={12}>

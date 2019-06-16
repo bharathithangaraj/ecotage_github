@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Redirect,withRouter} from "react-router";
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -100,6 +101,11 @@ class SignIn extends Component{
                         password:this.state.password};
         this.props.loginIn(formData)
         e.preventDefault();
+        const {logininfo} = this.props
+        console.log("sfdjsfjlkdjsflkjsd :::::::"+JSON.stringify(logininfo))
+       // if(this.props.logininfo.response ? this.props.logininfo.response.message === 'success':"") {
+          this.props.history.push('/');
+        //}
       }
       
 render() {
@@ -188,10 +194,12 @@ SignIn.propTypes = {
 
 // export default withStyles(styles)(SignIn);
 const mapStateToProps = state =>({
-  user : state.loginStore.user
+  user : state.loginStore.user,
+  logininfo : state.loginStore.logininfo
 })
 const mapDispatchToProps = dispatch => bindActionCreators ({
   loginIn
 },dispatch)
 
-export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(SignIn));
+//export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(SignIn));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(SignIn)))

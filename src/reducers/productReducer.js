@@ -2,7 +2,7 @@
 import {SHOW_ALL_PRODUCT,SHOW_PRODUCT,PRODUCT_SEARCH,SHOW_PRODUCTS_IN_CART,ADD_TO_CART,REMOVE_FROM_CART,
     BUY_NOW,UPDATE_CART_ITEM_QUANTITY,CART_ITEM_REMOVE,SHOW_ALL_CATEGORY,PAGE_URL,
     SHOW_PRODUCTS_BY_CATEGORY,RESET_PRODUCTS,PRODUCT_DET_URL,SHOW_PRODUCTS_BY_CATNAME,
-    SHOW_TOP_PRODUCTS, RESET_PRODUCTITEM,RESET_CATEGORIES,ADD_ORDERS,SHOW_ORDERS} from '../Action_Constants';
+    SHOW_TOP_PRODUCTS, RESET_PRODUCTITEM,RESET_CATEGORIES,ADD_ORDERS,SHOW_ORDERS,RESET_PRODUCTCART} from '../Action_Constants';
 
 const ecoteageState = {
     // productsList : [],
@@ -157,6 +157,12 @@ export default function (state = ecoteageState , action) {
             return  {
                 ...state,
                 orders : data
+            }
+
+        case RESET_PRODUCTCART :
+            return  {
+                ...state,
+                productInCart : []
             }
         
        default :

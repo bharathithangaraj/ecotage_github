@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect,withRouter} from "react-router";
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -23,8 +24,10 @@ import HomeMenuBar from './HomeMenuBar';
 import BodyComponent from '../components/BodyComponent'
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-
+import {resetLoginInfo,resetSignUp,resetUserDetail} from '../action/UserAction';
+import {resetProductInCart} from '../action/action'
 const styles = theme => ({
   appBar : {
      backgroundColor : '#058541',
@@ -148,6 +151,21 @@ class HomeSearchBar extends React.Component {
   handleMenuClose = () => {
     this.setState({ anchorEl: null });
     this.handleMobileMenuClose();
+
+  };
+
+  handleOptionClose = (event) => {
+
+   const{resetLoginInfo,resetSignUp,resetUserDetail,resetProductInCart} = this.props
+   resetLoginInfo();
+   resetSignUp();
+   this.props.resetUserDetail();
+   resetProductInCart();
+   
+    this.setState({ anchorEl: null });
+    this.handleMobileMenuClose();
+    this.props.history.push('/')
+
   };
 
   handleMobileMenuOpen = event => {
@@ -164,13 +182,15 @@ class HomeSearchBar extends React.Component {
 
   render() {
     const { anchorEl, mobileMoreAnchorEl } = this.state;
-    const { classes,productInCart } = this.props;
+    const { classes,productInCart,logininfo } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const accountOpen = Boolean(anchorEl);
 
 
     const renderMenu = (
+     <React.Fragment>
+      
       <Menu
         anchorEl={anchorEl}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -178,51 +198,56 @@ class HomeSearchBar extends React.Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-       <Link to='/Signin' style={{textDecoration:'none'}}><MenuItem onClick={this.handleMenuClose}> Signin</MenuItem></Link>
-       <Link to='/Signup' style={{textDecoration:'none'}}><MenuItem onClick={this.handleMenuClose}>Signup</MenuItem></Link>
-        <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+       
+        {logininfo.userId == null ?  <Link to='/Signin' style={{textDecoration:'none'}}><MenuItem onClick={this.handleMenuClose}> Signin</MenuItem></Link> : undefined}
+      
+        {logininfo.userId == null  ?  <Link to='/Signup' style={{textDecoration:'none'}}><MenuItem onClick={this.handleMenuClose}>Signup</MenuItem></Link> : undefined }
+        {logininfo.userId != null ? <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem> : undefined }
+        {/* <MenuItem onClick={this.handleMenuClose}>My account</MenuItem> */}
+        {logininfo.userId != null  ?<MenuItem id="logout" onClick={(event) => this.handleOptionClose(event)} >Log Out</MenuItem> : undefined }
       </Menu>
+      </React.Fragment>
     );
 
-    const renderMobileMenu = (
-      <Menu
-        anchorEl={mobileMoreAnchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        open={isMobileMenuOpen}
-        onClose={this.handleMenuClose}
-      >
-        <MenuItem onClick={this.handleMobileMenuClose}>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <MailIcon />
-            </Badge>
-          </IconButton>
-          <p>Messages</p>
-        </MenuItem>
-        <MenuItem onClick={this.handleMobileMenuClose}>
-          <IconButton color="inherit">
-            <Badge badgeContent={11} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-          <p>Notifications</p>
-        </MenuItem>
-        <MenuItem onClick={this.handleProfileMenuOpen}>
-          <IconButton color="inherit">
-            <AccountCircle />
-          </IconButton>
-          <p>Profile</p>
-        </MenuItem>
-      </Menu>
-    );
+    // const renderMobileMenu = (
+    //   <Menu
+    //     anchorEl={mobileMoreAnchorEl}
+    //     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+    //     transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+    //     open={isMobileMenuOpen}
+    //     onClose={this.handleMenuClose}
+    //   >
+    //     <MenuItem onClick={this.handleMobileMenuClose}>
+    //       <IconButton color="inherit">
+    //         <Badge badgeContent={4} color="secondary">
+    //           <MailIcon />
+    //         </Badge>
+    //       </IconButton>
+    //       <p>Messages</p>
+    //     </MenuItem>
+    //     <MenuItem onClick={this.handleMobileMenuClose}>
+    //       <IconButton color="inherit">
+    //         <Badge badgeContent={11} color="secondary">
+    //           <NotificationsIcon />
+    //         </Badge>
+    //       </IconButton>
+    //       <p>Notifications</p>
+    //     </MenuItem>
+    //     <MenuItem onClick={this.handleProfileMenuOpen}>
+    //       <IconButton color="inherit">
+    //         <AccountCircle />
+    //       </IconButton>
+    //       <p>Profile</p>
+    //     </MenuItem>
+    //   </Menu>
+    // );
 
     return (
         
       <div className={classes.root}>
         <AppBar position="static" className={classes.appBar}>
           <Toolbar>
+         
             {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
               <MenuIcon />
             </IconButton> */}
@@ -243,6 +268,11 @@ class HomeSearchBar extends React.Component {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
+            {JSON.stringify(logininfo) !== '{}' ?
+             <Typography style={{textDecoration:'none', color:'inherit',paddingTop:'4%',fontWeight:'700',fontFamily:'roboto'}}>Welcome 
+             &nbsp;<span style={{color:'#ea6709', textOverflow:'ellipsis', fontWeight:'700',fontFamily:'roboto'}}>{this.props.logininfo.userName}</span>
+             </Typography> : undefined}
+
             <IconButton
                   aria-owns={accountOpen ? 'menu-appbar' : undefined}
                   aria-haspopup="true"
@@ -254,17 +284,7 @@ class HomeSearchBar extends React.Component {
               {/* <Link style={{textDecoration:'none',color:'white'}} to={'/'}><Tab style={{minWidth:'50px'}} label="Login" /> </Link> */}
               <Link to='/OrderConfirmed' style={{textDecoration:'none', color:'white', opacity:'9'}}> <Tab style={{minWidth:'5%'}} label="Orders" /> </Link>
               
-             {/* <Badge   color="secondary" badgeContent={this.props.productInCart.length > 0 ? this.props.productInCart.length:''}>
-             <Link to='/ViewCart/' style={{textDecoration:'none', color:'white'}}><Tab  style={{minWidth:'5%'}} label="Cart"  /></Link>
-                </Badge> */}
-                
-              {/* <sup><Badge style={{padding:'10px', margin:'10px'}} color="secondary" badgeContent={this.props.productInCart.length > 0 ? this.props.productInCart.length:''}>
-              <Link to='/ViewCart/' style={{textDecoration:'none', color:'white'}}><Tab  style={{minWidth:'5%'}} label="Cart"  /> </Link>
-                </Badge>
-              </sup> */}
-              {/* <Badge color="secondary" badgeContent={this.props.productInCart.length > 0 ? this.props.productInCart.length:''} className={classes.margin}>
-              <Link to='/ViewCart/' style={{textDecoration:'none', color:'white'}}><Typography className={classes.padding}>Cart</Typography></Link>
-            </Badge> */}
+            
    <Link to='/ViewCart/' style={{textDecoration:'none', color:'white', opacity:'9'}}>
       <IconButton aria-label="Cart">
           <Badge badgeContent={productInCart.length} color="secondary">
@@ -272,6 +292,7 @@ class HomeSearchBar extends React.Component {
           </Badge>
       </IconButton>
       </Link>
+
               
               </Tabs>
            
@@ -281,7 +302,9 @@ class HomeSearchBar extends React.Component {
                 <MoreIcon />
               </IconButton>
             </div>
+            
           </Toolbar>
+          
           <HomeMenuBar/>
          
         
@@ -289,7 +312,7 @@ class HomeSearchBar extends React.Component {
         {/* <div style={{marginTop:'10%'}}> <ImgGrid/></div> */}
         <BodyComponent/>
         {renderMenu}
-        {renderMobileMenu}
+        {/* {renderMobileMenu} */}
       </div>
     );
   }
@@ -301,8 +324,17 @@ HomeSearchBar.propTypes = {
 
 const mapStateToProps = state =>({  
   productInCart : state.productStore.productInCart,
+  logininfo : state.loginStore.logininfo
 })
 
-export default connect(mapStateToProps)((withStyles(styles)(HomeSearchBar)));
+const mapDispatchToProps = dispatch => bindActionCreators ({
+  resetLoginInfo,
+  resetSignUp,
+  resetUserDetail,
+  resetProductInCart
+},dispatch)
+
+//export default connect(mapStateToProps)((withStyles(styles)(HomeSearchBar)));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(HomeSearchBar)))
 
 // export default withStyles(styles)(HomeSearchBar);

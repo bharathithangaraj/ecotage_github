@@ -20,13 +20,18 @@ import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import { getUserDetail} from '../action/UserAction'
 
 class ViewCart extends Component {
   async  componentDidMount(){
 
-  const { productInCart, showAllProductsInCart } = this.props;
+  const { productInCart, showAllProductsInCart,logininfo,getUserDetail } = this.props;
   console.log("compononet did mount called")
-  await showAllProductsInCart();
+  if(logininfo.userId != null) {
+    await showAllProductsInCart(logininfo.userId);
+    await getUserDetail(logininfo.userName,logininfo.token);
+  }
+  
    
  }
 
@@ -37,7 +42,11 @@ class ViewCart extends Component {
    
 componentWillUnmount() {
   console.log("View cart componentWillUnmount")
-  this.props.showAllProductsInCart();
+  if(this.props.logininfo.userId != null) {
+    this.props.showAllProductsInCart(this.props.logininfo.userId);
+     this.props.getUserDetail(this.props.logininfo.userName,this.props.logininfo.token);
+  }
+  
 }
 
   sortByKey = (array, key) => {
@@ -74,6 +83,12 @@ componentWillUnmount() {
 
   updateItemQuantity = (event, cart) => {
 
+    const{logininfo} = this.props
+
+    if(logininfo.userId == null){
+      this.props.history.push("/Signin")
+    }
+
     let cartItem = {
       "cartId": cart.cartId,
       "price": cart.price,
@@ -87,6 +102,12 @@ componentWillUnmount() {
     this.props.updateProductQuantity(cartItem)
   }
   onloadCartQuantityUpdate(cart) {
+
+    const{logininfo} = this.props
+
+    if(logininfo.userId == null){
+      this.props.history.push("/Signin")
+    }
    
     let cartItem = {
       "cartId": cart.cartId,
@@ -100,7 +121,7 @@ componentWillUnmount() {
   }
 
     render() {      
-      const { productInCart, showAllProductsInCart } = this.props
+      const { productInCart, showAllProductsInCart,logininfo } = this.props
       let totalPrice = 0;
       const emptyCart = (
         <span>
@@ -199,13 +220,16 @@ componentWillUnmount() {
   }
 }
 const mapStateToProps = state =>({
-    productInCart : state.productStore.productInCart
+    productInCart : state.productStore.productInCart,
+    logininfo : state.loginStore.logininfo,
+    userDetail : state.loginStore.userDetail
 })
 const mapDispatchToProps = dispatch => bindActionCreators ({
   buyNow,
   removeFromCart,
   showAllProductsInCart,
-  updateProductQuantity
+  updateProductQuantity,
+  getUserDetail
 },dispatch)
 
 export default connect(mapStateToProps,mapDispatchToProps)(ViewCart);

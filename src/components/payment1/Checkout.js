@@ -58,14 +58,11 @@ const useStyles = makeStyles => (theme => ({
 class Checkout extends Component {
 
   async  componentDidMount(){
-
+    
     const { getUserDetail,logininfo } = this.props;
-    await getUserDetail('bharathigragaraj');
-    const {firstName} = this.state;
-    console.log("logininfo   ------------>");
-    console.log(logininfo.firstName)
-    this.setState({firstName : logininfo.firstName})
-
+    if(logininfo.userId != null) {
+    await getUserDetail(logininfo.userName,logininfo.token);
+    }
      
    }
   
@@ -75,9 +72,11 @@ class Checkout extends Component {
   
      
   componentWillUnmount() {
-    this.props.getUserDetail('bharathigragaraj');
+    const {logininfo } = this.props;
+    if(logininfo.userId != null) {
+    this.props.getUserDetail(logininfo.userName,logininfo.token);
+    }
   }
-
   
     state = {  
         
@@ -95,7 +94,8 @@ class Checkout extends Component {
         expDate : '',
         cvv :'',
         cvvText:false,
-        cardText :false
+        cardText :false,
+        addUserDtls : false, 
         
     }
 
@@ -176,8 +176,8 @@ class Checkout extends Component {
     render() {
         const classes = useStyles();
         const {step} = this.state;
-        const {firstName,lastName,addressline1,addressline2,city,state,zip,country,nameOnCard,cardNumber,expDate,cvv,cvvText,cardText} = this.state
-        const values = {firstName,lastName,addressline1,addressline2,city,state,zip,country,nameOnCard,cardNumber,expDate,cvv,cvvText,cardText}
+        const {firstName,lastName,addressline1,addressline2,city,state,zip,country,nameOnCard,cardNumber,expDate,cvv,cvvText,cardText,addUserDtls} = this.state
+        const values = {firstName,lastName,addressline1,addressline2,city,state,zip,country,nameOnCard,cardNumber,expDate,cvv,cvvText,cardText,addUserDtls}
         const steps = ['Shipping address', 'Payment details', 'Review your order'];
         
        return (
@@ -224,7 +224,8 @@ class Checkout extends Component {
 }
 
 const mapStateToProps = state =>({
-  logininfo : state.loginStore.logininfo
+  logininfo : state.loginStore.logininfo,
+  userDetail : state.loginStore.userDetail
 })
 const mapDispatchToProps = dispatch => bindActionCreators ({
   getUserDetail

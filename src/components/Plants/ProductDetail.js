@@ -42,7 +42,11 @@ class ProductDetail extends Component {
       event.target.style.backgroundColor ='grey';
       return
     }         
-    const {addToCart,productInCart} = this.props;
+    const {addToCart,productInCart,logininfo} = this.props;
+    if(logininfo.userId == null){
+      this.props.history.push("/Signin")
+      return
+    }
     var isDuplicate = false;
     
     if(productInCart.length >0 ){
@@ -59,7 +63,7 @@ class ProductDetail extends Component {
         "productId": product.productId,
         "quantity": 1,
         "status": product.status,
-        "userId": 1
+        "userId": logininfo.userId
       }
       if(!isDuplicate){
     addToCart(cartItem);
@@ -76,7 +80,11 @@ class ProductDetail extends Component {
   }
 
   buyCurrentProduct = (product) => {
-    const {addToOrders} = this.props;
+    const {addToOrders,logininfo} = this.props;
+    if(logininfo.userId == null){
+      this.props.history.push("/Signin")
+      return
+    }
 
     //const total = document.getElementById('totalPrice').getAttribute('value')
     const {quantity} = this.state ;
@@ -91,7 +99,7 @@ class ProductDetail extends Component {
       "quantity": quantity,
       "status": product.status,
       "total":totalPrice ,
-      "userId": 1
+      "userId": logininfo.userId
     }
     orderArr.push(orderItem)
   
@@ -129,13 +137,13 @@ class ProductDetail extends Component {
                       className="addCartButton" 
                       style = {{backgroundColor:productItem.quantity ===0 ?'grey':'#058541'}}
                     />
-              {productItem.quantity > 0 ?
+              {/* {productItem.quantity > 0 ?
                <input type="submit" 
                name='Buy Now' value='Buy Now' 
                title='Buy Now' 
                onClick={()=>this.buyCurrentProduct(productItem)} 
                 className="addCartButton" />   : undefined
-              }  
+              }   */}
            
             </div>
               <span style={{color:'red', fontFamily:'roboto', fontSize:'12px',marginLeft:'30px'}}><b>Note:</b> The image is for reference purpose only. The actual product may vary in shape or appearance based on climate, age, height etc.</span>
@@ -183,7 +191,8 @@ class ProductDetail extends Component {
 }
 const mapStateToProps = state =>({  
     productInCart : state.productStore.productInCart,
-    productItem : state.productStore.productItem
+    productItem : state.productStore.productItem,
+    logininfo:state.loginStore.logininfo
 })
 const mapDispatchToProps = dispatch => bindActionCreators ({
   addToCart,

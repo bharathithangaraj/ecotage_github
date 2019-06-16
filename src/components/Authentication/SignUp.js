@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Redirect,withRouter} from "react-router";
 import PropTypes from 'prop-types';
 // import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -126,13 +127,25 @@ class Signup extends Component{
         event.target.value = event.target.value.replace(/\D/g,'');
       } 
       signUpSumbmit = (e) =>{
+        
         this.setState({isFormSubmitted:true})
-        let formData = {email:this.state.email,
-          password:this.state.password,mobileNumber:this.state.mobileNumber};
+        let formData = {
+
+          email:this.state.email,
+          password:this.state.password,
+          mobileNumber:this.state.mobileNumber,
+         
+        };
           this.props.signUpForm(formData)
         // here we need to  implement the async await to send OTP to user mobile and wait for response. 
 
         e.preventDefault();
+
+        const {signUpDetail} = this.props
+        console.log("sfdjsfjlkdjsflkjsd :::::::"+JSON.stringify(signUpDetail))
+        //if(this.props.signUpDetail.response ? this.props.signUpDetail.response.message === "success" :"") {
+          this.props.history.push('/Signin');
+       // }
       } 
 
       handleClickOpen = (e) => {
@@ -244,76 +257,76 @@ render() {
         </form>
       </Paper>
       )
-      const otpValidation  = (
-        <Paper className={classes.paper}>        
-            <Typography component="h9" variant="h5">
-            Create Account
-            </Typography>
+      // const otpValidation  = (
+      //   <Paper className={classes.paper}>        
+      //       <Typography component="h9" variant="h5">
+      //       Create Account
+      //       </Typography>
             
-            <form className={classes.form}>
-                <TextField
-                    disabled
-                    label="Mobile Number"
-                    name="mobileNumbers"
-                    variant="filled"    
-                    defaultValue="mobilenumber"
-                    className={classes.textField}
+      //       <form className={classes.form}>
+      //           <TextField
+      //               disabled
+      //               label="Mobile Number"
+      //               name="mobileNumbers"
+      //               variant="filled"    
+      //               defaultValue="mobilenumber"
+      //               className={classes.textField}
 
-                    style={{textIndent:'20px'}}                                                            
-                    value={this.state.mobileNumber}  
-                    InputProps={{
-                        startAdornment: '(+91)-',
-                    }}      
-                />
-                <TextField 
-                    error = { otpHelperText.length === 0 ?  false:true}
-                    label="Enter OTP"
-                    name="OTPil"
-                    variant="outlined"
-                    id="OTP"                    
-                    autoComplete="OTP"                    
-                    fullWidth
-                    required
-                    margin="normal"
-                    helperText={this.state.otpHelperText}
-                    onChange={this.handleChange('OTP')}
-                />
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                    onClick={this.handleClickOpen}
-                >
-                    Verify
-                </Button> 
+      //               style={{textIndent:'20px'}}                                                            
+      //               value={this.state.mobileNumber}  
+      //               InputProps={{
+      //                   startAdornment: '(+91)-',
+      //               }}      
+      //           />
+      //           <TextField 
+      //               error = { otpHelperText.length === 0 ?  false:true}
+      //               label="Enter OTP"
+      //               name="OTPil"
+      //               variant="outlined"
+      //               id="OTP"                    
+      //               autoComplete="OTP"                    
+      //               fullWidth
+      //               required
+      //               margin="normal"
+      //               helperText={this.state.otpHelperText}
+      //               onChange={this.handleChange('OTP')}
+      //           />
+      //           <Button
+      //               type="submit"
+      //               fullWidth
+      //               variant="contained"
+      //               color="primary"
+      //               className={classes.submit}
+      //               onClick={this.handleClickOpen}
+      //           >
+      //               Verify
+      //           </Button> 
                 
-              <Dialog
-                fullScreen={fullScreen}
-                open={this.state.open}
-                onClose={this.handleClose}
-                aria-labelledby="responsive-dialog-title"
-              >
-                <DialogTitle id="responsive-dialog-title">{"OTP Verification"}</DialogTitle>
-                <DialogContent>
-                  <DialogContentText>
-                    Your Mobile Number has been verified. Kinldy do the same for E-Mail verfication in Profile Menu. 
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>            
-                  <Button onClick={this.handleClose} color="primary" autoFocus>
-                    Close
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            </form>
-        </Paper>
+      //         <Dialog
+      //           fullScreen={fullScreen}
+      //           open={this.state.open}
+      //           onClose={this.handleClose}
+      //           aria-labelledby="responsive-dialog-title"
+      //         >
+      //           <DialogTitle id="responsive-dialog-title">{"OTP Verification"}</DialogTitle>
+      //           <DialogContent>
+      //             <DialogContentText>
+      //               Your Mobile Number has been verified. Kinldy do the same for E-Mail verfication in Profile Menu. 
+      //             </DialogContentText>
+      //           </DialogContent>
+      //           <DialogActions>            
+      //             <Button onClick={this.handleClose} color="primary" autoFocus>
+      //               Close
+      //             </Button>
+      //           </DialogActions>
+      //         </Dialog>
+      //       </form>
+      //   </Paper>
 
-      );
+      // );
   return (
     <main className={classes.main}>
-    {isFormSubmitted?otpValidation:Signup}
+    {Signup}
     </main>
   );
 }
@@ -324,11 +337,13 @@ Signup.propTypes = {
 
 // export default withStyles(styles)(Signup);
 const mapStateToProps = state =>({
-  user : state.loginStore.user
+  user : state.loginStore.user,
+  signUpDetail : state.loginStore.signUpDetail
 })
 const mapDispatchToProps = dispatch => bindActionCreators ({
   signUpForm,
   verificationOTP
 },dispatch)
 
-export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(Signup));
+//export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Signup))(withStyles(styles)(Signup));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(Signup)))

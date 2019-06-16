@@ -46,19 +46,27 @@ class OrderResponse extends Component {
     
     async  componentDidMount() {
 
-        const { getAllOrders } = this.props;
-        await getAllOrders(1);
+        const { getAllOrders,logininfo } = this.props;
+        if(logininfo.userId != null) {
+        await getAllOrders(logininfo.userId);
+        }
 
     }
 
     componentDidCatch() {
-        const { getAllOrders } = this.props;
-        getAllOrders(1);
+        const { getAllOrders,logininfo } = this.props;
+        if(logininfo.userId != null) {
+          getAllOrders(logininfo.userId);
+        }
+        
     }
 
 
     componentWillUnmount() {
-        this.props.getAllOrders(1);
+      if(this.props.logininfo.userId != null) {
+        this.props.getAllOrders(this.props.logininfo.userId);
+      }
+        
     }
 
    
@@ -136,7 +144,8 @@ class OrderResponse extends Component {
 }
 const mapStateToProps = state => ({
     productInCart: state.productStore.productInCart,
-    orders : state.productStore.orders
+    orders : state.productStore.orders,
+    logininfo : state.loginStore.logininfo
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
     getAllOrders,

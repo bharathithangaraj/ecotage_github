@@ -1,10 +1,13 @@
 
-import {SIGNIN,SIGNUP,VERIFYOTP,USERINFO} from '../Action_Constants';
+import {SIGNIN,SIGNUP,VERIFYOTP,USERINFO,RESET_SIGNUP,RESET_LOGININFO,RESET_USERDETAIL} from '../Action_Constants';
 
 const loginState = {
     logininfo:{},
     signUpDetail:{},
-    otpNumber : ''
+    otpNumber : '',
+    userDetail : {}
+    
+    
 }
 export default function (state = loginState , action) {
     const {type,data} = action
@@ -12,13 +15,15 @@ export default function (state = loginState , action) {
     switch(type){
         case SIGNIN : 
         return {
-            login:data,
-            ...state
+            ...state,
+            logininfo:data
+           
         }
         case SIGNUP:
         return {
+            ...state,
             signUpDetail:data,
-            ...state
+            
         }
         case VERIFYOTP:
         return {
@@ -28,8 +33,27 @@ export default function (state = loginState , action) {
         case USERINFO :
             return {
                 ...state,
-                logininfo : data
+                userDetail : data
             }
+        
+        case RESET_LOGININFO :
+            return {
+            ...state,
+            logininfo : {}
+        }
+
+        case RESET_SIGNUP :
+                return {
+                ...state,
+                signUpDetail : {}
+        }
+
+        case RESET_USERDETAIL :
+                return {
+                ...state,
+                userDetail : {}
+        }
+       
        default :
         return state
     }

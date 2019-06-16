@@ -32,6 +32,12 @@ export const RESET_PRODUCTITEM ="RESET_PRODUCTITEM";
 export const RESET_CATEGORIES = 'RESET_CATEGORIES';
 export const ADD_ORDERS = 'ADD_ORDERS';
 
+export const RESET_LOGININFO ="RESET_LOGININFO";
+export const RESET_SIGNUP = 'RESET_SIGNUP';
+export const RESET_USERDETAIL = 'RESET_USERDETAIL';
+export const RESET_PRODUCTCART = 'RESET_PRODUCTCART';
+
+
 //Cart Action URLs
 export const SHOW_ALL_PRODUCT_IN_CART_URL = APP_URL+'/cart/products/';
 export const UPDATE_CART_ITEM_QUANTITY_URL = APP_URL+'/cart/product/update/';

@@ -26,8 +26,10 @@ class CheckOut extends Component {
 
   async  componentDidMount(){
 
-  const { showAllProductsInCart } = this.props;
-  await showAllProductsInCart();
+  const { showAllProductsInCart , logininfo} = this.props;
+  if(logininfo.userId != null) {
+  await showAllProductsInCart(logininfo.userId);
+  }
    
  }
 
@@ -37,11 +39,17 @@ class CheckOut extends Component {
 
    
 componentWillUnmount() {
-  this.props.showAllProductsInCart();
+  if(this.props.logininfo.userId != null) {
+  this.props.showAllProductsInCart(this.props.logininfo.userId);
+  }
 }
 
 confirmOrder = (event,products) => {
-  const {addToOrders} = this.props;
+  const {addToOrders,logininfo} = this.props;
+  if(logininfo.userId == null){
+    this.props.history.push("/Signin")
+    return
+  }
  
  const total = document.getElementById('totalPrice').getAttribute('value')
  var orderArr = [];
@@ -54,7 +62,7 @@ confirmOrder = (event,products) => {
       "quantity": products[i].quantity,
       "status": 1,
       "total":parseTotal ,
-      "userId": 1
+      "userId": logininfo.userId
     }
     orderArr.push(orderItem)
   }
@@ -127,7 +135,8 @@ confirmOrder = (event,products) => {
   }
 }
 const mapStateToProps = state =>({
-    productInCart : state.productStore.productInCart
+    productInCart : state.productStore.productInCart,
+    logininfo : state.loginStore.logininfo
 })
 const mapDispatchToProps = dispatch => bindActionCreators ({
     showAllProductsInCart,

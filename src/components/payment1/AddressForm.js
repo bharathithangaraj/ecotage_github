@@ -13,27 +13,38 @@ class AddressForm extends Component {
 
     async  componentDidMount(){
 
-        const { getUserDetail } = this.props;
-        await getUserDetail('bharathigragaraj');
-         
+       
+        const { getUserDetail,logininfo } = this.props;
+       if(logininfo.userId != null) {
+        await getUserDetail(logininfo.userName,logininfo.token);
+       }
+       
        }
       
        componentDidCatch() {
        
-      }
+        }
       
          
       componentWillUnmount() {
-        this.props.getUserDetail('bharathigragaraj');
+        const {logininfo } = this.props;
+        if(logininfo.userId != null) {
+        this.props.getUserDetail(logininfo.userName,logininfo.token);
+        }
       }
 
     continue = e => {
-        console.log(e)
+       
         e.preventDefault();
         this.props.nextStep();
     };
+
+    formControlCheck = (event) =>  {
+        this.props.values.addUserDtls = true 
+       
+    }
     render() {
-        const { values, handleChange,logininfo } = this.props;
+        const { values, handleChange,userDetail } = this.props;
 
         return (
             <React.Fragment>
@@ -50,7 +61,7 @@ class AddressForm extends Component {
                             fullWidth
                             autoComplete="fname"
                             onChange ={handleChange('firstName')}
-                            defaultValue={values.firstName ==='' ? logininfo.firstName: values.firstName}
+                            defaultValue={values.firstName ==='' ? userDetail.firstName: values.firstName}
                         />
                     </Grid>
                      <Grid item xs={12} sm={6}>
@@ -62,7 +73,7 @@ class AddressForm extends Component {
                             fullWidth
                             autoComplete="lname"
                             onChange ={handleChange('lastName')}
-                            defaultValue={values.lastName === ''?logininfo.lastName : values.lastName}
+                            defaultValue={values.lastName === ''?userDetail.lastName : values.lastName}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -74,7 +85,7 @@ class AddressForm extends Component {
                             fullWidth
                             autoComplete="billing address-line1"
                             onChange ={handleChange('addressline1')}
-                            defaultValue={values.addressline1 === '' ? logininfo.showUserDetails.address1 : values.addressline1}
+                            defaultValue={values.addressline1 === '' ? userDetail.showUserDetails ?userDetail.showUserDetails.address1:values.addressline1 : values.addressline1}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -85,7 +96,7 @@ class AddressForm extends Component {
                             fullWidth
                             autoComplete="billing address-line2"
                             onChange ={handleChange('addressline1')}
-                            defaultValue={values.addressline2 ==='' ? logininfo.showUserDetails.address2 : values.addressline2}
+                            defaultValue={values.addressline2 ==='' ? userDetail.showUserDetails ? userDetail.showUserDetails.address2 : values.addressline2:values.addressline2}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -97,7 +108,7 @@ class AddressForm extends Component {
                             fullWidth
                             autoComplete="billing address-level2"
                             onChange ={handleChange('city')}
-                            defaultValue={values.city ==='' ? logininfo.showUserDetails.city :values.city}
+                            defaultValue={values.city ==='' ? userDetail.showUserDetails ? userDetail.showUserDetails.city :values.city:values.city}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -106,7 +117,7 @@ class AddressForm extends Component {
                         label="State/Province/Region" 
                         fullWidth 
                         onChange ={handleChange('state')}
-                        defaultValue={values.state ==='' ? logininfo.showUserDetails.state :values.state}
+                        defaultValue={values.state ==='' ? userDetail.showUserDetails ?userDetail.showUserDetails.state :values.state:values.state}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -118,7 +129,7 @@ class AddressForm extends Component {
                             fullWidth
                             autoComplete="billing postal-code"
                             onChange ={handleChange('zip')}
-                            defaultValue={values.zip ==='' ? logininfo.showUserDetails.zip :values.zip}
+                            defaultValue={values.zip ==='' ? userDetail.showUserDetails ? userDetail.showUserDetails.pincode :values.zip:values.zip}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -130,13 +141,15 @@ class AddressForm extends Component {
                             fullWidth
                             autoComplete="billing country"
                             onChange ={handleChange('country')}
-                            defaultValue={values.country ==='' ? logininfo.showUserDetails.country :values.country}
+                            defaultValue={values.country ==='' ? userDetail.showUserDetails ? userDetail.showUserDetails.country :values.country:values.country}
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <FormControlLabel
+                        <FormControlLabel id="formControl"
                             control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
                             label="Use this address for payment details"
+                            onChange= { (event) => this.formControlCheck(event)}
+                            value=""
                         />
                     </Grid>  
                 </Grid>
@@ -170,7 +183,8 @@ const styles = {
 }
 
 const mapStateToProps = state =>({
-    logininfo : state.loginStore.logininfo
+    logininfo : state.loginStore.logininfo,
+    userDetail : state.loginStore.userDetail
   })
   const mapDispatchToProps = dispatch => bindActionCreators ({
     getUserDetail

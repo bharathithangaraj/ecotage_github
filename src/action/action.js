@@ -31,7 +31,8 @@ export function getProduct(id){
     }
 }
 export function showAllProductsInCart(userId){
-    userId = 1;
+   // userId = 1;
+   console.log('showAllProductsInCart ------------->'+userId)
     return async function(dispatch){                
         const res = await fetch(SHOW_ALL_PRODUCT_IN_CART_URL+'/'+userId);
         const cartProducts = await res.json();        
@@ -227,32 +228,13 @@ export function resetProductItem(){
     }
 }
 
-// export function addToOrders(products) {
+export function resetProductInCart(){
+    console.log('resetProductInCart -------------->');
+    return {
 
-//     const settings = {
-//         method: 'POST', // or 'PUT'
-//         body: JSON.stringify(products), // data can be `string` or {object}!
-//         headers:{
-//           'Content-Type': 'application/json'
-//         }
-//     };
-   
-//     return async function(dispatch){
-//         // this.forceUpdate();
-//         const res = await fetch(`http://localhost:8090/order/new/`,settings);
-//         const orders = await res.json();
-//         console.log('ADD_ORDER_URL ++++++++++')
-//         console.log(JSON.stringify(orders))
-//         return dispatch({
-//             type : 'ADD_ORDERS',
-//             data: orders
-//         })
-        
-        
-//     }
-
-// }
-
+        type : 'RESET_PRODUCTCART'
+    }
+}
 
 
 export function addToOrders(products) {
@@ -281,11 +263,8 @@ export function addToOrders(products) {
 
 }
 
-
-
-
 export function getAllOrders(userId){
-    userId = 1;
+    //userId = 1;
 
     return async function(dispatch){                
         const res = await fetch(SHOW_ORDERS_URL+'/'+userId);
