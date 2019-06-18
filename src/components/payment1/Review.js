@@ -35,7 +35,7 @@ class Review extends Component {
         const { showAllProductsInCart,getUserDetail,logininfo } = this.props;
         if(logininfo.userId != null) {
             await showAllProductsInCart(logininfo.userId);
-            await getUserDetail(logininfo.userName);
+            this.props.getUserDetail(logininfo.userName,logininfo.token);
         }
        
        }
@@ -48,7 +48,7 @@ class Review extends Component {
       componentWillUnmount() {
           if(this.props.logininfo.userId != null) {
             this.props.showAllProductsInCart(this.props.logininfo.userId);
-            this.props.getUserDetail(this.props.logininfo.userName);
+            this.props.getUserDetail(this.props.logininfo.userName,this.props.logininfo.token);
           }
        
       }
@@ -66,7 +66,7 @@ class Review extends Component {
     confirmOrder = (event,products) => {
 
 
-        const {addToOrders,values,logininfo,addUserDetails} = this.props;
+        const {addToOrders,values,logininfo,addUserDetails,userDetail} = this.props;
         if(logininfo.userId == null) {
             this.props.history.push("/Signin")
             return
@@ -74,19 +74,19 @@ class Review extends Component {
 
         let userdetailInfo = {
            
-                "address1": values.addressline1,
-                "address2": values.addressline2,
+                "address1": values.addressline1 ==='' ?userDetail.showUserDetails.address1:values.addressline1,
+                "address2": values.addressline2 ===''? userDetail.showUserDetails.address2:values.addressline2,
                 "addressType": "OFFICE",
-                "city": values.city,
-                "country": values.country,
-                "firstName": values.firstName,
+                "city": values.city  ===''?userDetail.showUserDetails.city :values.city,
+                "country": values.country ==='' ? userDetail.showUserDetails.country:values.country,
+                "firstName": values.firstName ==='' ? userDetail.firstName : values.firstName,
                 "gender": "MALE",
                 "houseNo": "1/24",
-                "landMark":values.city,
-                "lastName": values.lastName,
-                "location": values.city,
-                "pincode": parseInt(values.zip),
-                "state": values.state,
+                "landMark":values.city ===''? userDetail.showUserDetails.city:values.city,
+                "lastName": values.lastName ===''?userDetail.lastName :values.lastName ,
+                "location": values.city ===''? userDetail.showUserDetails.city:values.city,
+                "pincode": parseInt(values.zip ==='' ?userDetail.showUserDetails.pincode:values.zip),
+                "state": values.state ==='' ? userDetail.showUserDetails.state:values.state,
                 "token": logininfo.token,
                 "userId": logininfo.userId
              
@@ -116,6 +116,7 @@ class Review extends Component {
         }
        
         addToOrders(orderArr);
+        
         this.props.history.push('/OrderConfirmed');
       }
 

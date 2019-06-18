@@ -148,8 +148,10 @@ class ProductDetail extends Component {
             </div>
               <span style={{color:'red', fontFamily:'roboto', fontSize:'12px',marginLeft:'30px'}}><b>Note:</b> The image is for reference purpose only. The actual product may vary in shape or appearance based on climate, age, height etc.</span>
             </div>
+            
             <div className="specification" style={{width:'33%', float:'left', fontFamily:'Roboto', color:'grey'}}>
-              {productItem.productDetails ? productItem.productDetails.specificaton :undefined}
+              <span style={{color:'green'}}>{productItem.productName} </span>
+              <div style={{padding:'2%'}}>{productItem.productDetails ? productItem.productDetails.specificaton :undefined} </div>
               <div style={{padding:'4%',fontSize:'24px',fontWeight:'700',color:'#fe5621',fontFamily:'Roboto', textAlign:'left'}}>
                      <span dangerouslySetInnerHTML={{ __html: '&#8377'}}></span> &nbsp;&nbsp;
                      {productItem.price}

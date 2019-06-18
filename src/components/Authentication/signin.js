@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Redirect,withRouter} from "react-router";
+import { Redirect, withRouter } from "react-router";
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -16,11 +16,11 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import TextField from '@material-ui/core/TextField';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import {loginIn} from '../../action/UserAction'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { loginIn } from '../../action/UserAction'
 
 
 // import Collapse from '@material-ui/core/Collapse';
@@ -30,7 +30,7 @@ import {loginIn} from '../../action/UserAction'
 
 
 const styles = theme => ({
-  
+
   main: {
     width: 'auto',
     display: 'block', // Fix IE 11 issue.
@@ -63,143 +63,156 @@ const styles = theme => ({
   },
 });
 
-class SignIn extends Component{
-  componentDidMount(){
+class SignIn extends Component {
+  componentDidMount() {
 
-  } 
-    
+  }
+
   componentWillUnmount() {
-     // console.log(JSON.stringify(this.props))        
-   }
- 
-    state = {
-        email : "",
-        emailHelperText : "",
-        passwordHelperText : "",
-        password : "",
-        checked: false,
-      };
-      handleChange = (name) => (event)=>{
-        // this.setState(state => ({ checked: !state.checked }));
-        this.setState({[name] : event.target.value});
-        
-      };
-      validateEmail =() =>(event)=>{
-        const emailVal = event.target.value;
-        if(emailVal.trim().length === 0 ){
-          this.setState({emailHelperText:'Please enter Email'})
-        }else if(!emailVal.match(/^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/)){
-          this.setState({emailHelperText:'Email is not valid'})
-        }else{
-          this.setState({emailHelperText:''})
-        }
-      }
-      loginSubmit = (e) =>{
-        console.log(JSON.stringify(this.props))
-        
-        let formData = {email:this.state.email,
-                        password:this.state.password};
-        this.props.loginIn(formData)
-        e.preventDefault();
-        const {logininfo} = this.props
-        console.log("sfdjsfjlkdjsflkjsd :::::::"+JSON.stringify(logininfo))
-       // if(this.props.logininfo.response ? this.props.logininfo.response.message === 'success':"") {
-          this.props.history.push('/');
-        //}
-      }
-      
-render() {
-    const { classes } = this.props;
-    const { checked,emailHelperText,passwordHelperText } = this.state;
+    // console.log(JSON.stringify(this.props))        
+  }
+
+  state = {
+    email: "",
+    emailHelperText: "",
+    passwordHelperText: "",
+    password: "",
+    checked: false,
+  };
+  handleChange = (name) => (event) => {
+    // this.setState(state => ({ checked: !state.checked }));
+    this.setState({ [name]: event.target.value });
+
+  };
+  validateEmail = () => (event) => {
+    const emailVal = event.target.value;
+    if (emailVal.trim().length === 0) {
+      this.setState({ emailHelperText: 'Please enter Email' })
+    }
+    // else if(!emailVal.match(/^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/)){
+    //   this.setState({emailHelperText:'Email is not valid'})
+    // }
+    else {
+      this.setState({ emailHelperText: '' })
+    }
+  }
+
+  loginSubmit = (e) => {
+    console.log(JSON.stringify(this.props))
+    e.preventDefault();
+    let formData = {
+      email: this.state.email,
+      password: this.state.password
+    };
+
+    this.props.loginIn(formData)
+
+    // if(this.props.logininfo.userId != null ) {
+    //     this.props.history.push('/');
+    //   }else {
+    //     this.setState({emailHelperText:'Please check your UserName/Password'})
+    //     this.setState({passwordHelperText:''})
+    //   }
+  }
+
+  render() {
+    const { classes, logininfo } = this.props;
+    const { checked, emailHelperText, passwordHelperText } = this.state;
+
+    if (undefined !== logininfo.userId && null !== logininfo.userId) {
+      this.props.history.push('/');
+    }
+
     const signIn = (
-        <Paper className={classes.paper}>
+      <Paper className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form}>        
-        <TextField 
-                error = { emailHelperText.length === 0 ?  false:true}
-                label="Email Address"
-                name="email"
-                variant="outlined"
-                id="email"
-                floatingLabelText="Phone"
-                autoComplete="email"
-                type="email"
-                fullWidth
-                required
-                margin="normal"
-                helperText={this.state.emailHelperText}
-                onChange={this.handleChange('email')}
-                onBlur={this.validateEmail(this)}
-            />
-            <div style={{height:'10px'}}/>
-            <TextField
-              error = {passwordHelperText.length === 0 ? false: true}
-              label="Password"
-              name="password"
-              variant="outlined"
-              id="password"
-              autoComplete="current-password"
-              type="password"
-              fullWidth
-              required
-              helperText={this.state.passwordHelperText}
-              onChange={this.handleChange('password')}            
-              onBlur={()=>{this.setState({passwordHelperText : this.state.password.length ===0?'Enter password':''})}}
-            />
-            <FormControlLabel
-          control={
-            <Switch
-              checked = {checked}
-              value="checked"
-              color="primary"
-              onChange={()=>{this.setState({checked:!checked})}}
-            />
-          }
-          label="Remember Me"
-        />          
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={this.loginSubmit}
-            >
-              Sign in
-            </Button>            
-            <FormHelperText id="my-helper-text">New to Ecotage
-              &nbsp;&nbsp;
+        <form className={classes.form}>
+          <TextField
+            error={emailHelperText.length === 0 ? false : true}
+            label="Email Address"
+            name="email"
+            variant="outlined"
+            id="email"
+            floatingLabelText="Phone"
+            autoComplete="email"
+            type="email"
+            fullWidth
+            required
+            margin="normal"
+            helperText={this.state.emailHelperText}
+            onChange={this.handleChange('email')}
+            onBlur={this.validateEmail(this)}
+          />
+          <div style={{ height: '10px' }} />
+          <TextField
+            error={passwordHelperText.length === 0 ? false : true}
+            label="Password"
+            name="password"
+            variant="outlined"
+            id="password"
+            autoComplete="current-password"
+            type="password"
+            fullWidth
+            required
+            helperText={this.state.passwordHelperText}
+            onChange={this.handleChange('password')}
+            onBlur={() => { this.setState({ passwordHelperText: this.state.password.length === 0 ? 'Enter password' : '' }) }}
+          />
+          {/* <FormControlLabel
+            control={
+              <Switch
+                checked={checked}
+                value="checked"
+                color="primary"
+                onChange={() => { this.setState({ checked: !checked }) }}
+              />
+            }
+            label="Remember Me"
+          /> */}
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={this.loginSubmit}
+          >
+            Sign in
+            </Button>
+          <FormHelperText id="my-helper-text">New to Ecotage
+            &nbsp;&nbsp;
               <Link to={`/Signup`}>
-                SignUp
+              SignUp
               </Link>
-            </FormHelperText>
+          </FormHelperText>
+          <Typography>Go to <Link to='/Signup'><span style={{ textTransform: 'capitalize', cursor: 'pointer', color: 'blue' }}>Sign Up</span></Link> </Typography>
         </form>
       </Paper>
-      )
-  return (
-    <main className={classes.main}>
-    {signIn}    
-    </main>
-  );
-}
+    )
+    return (
+      <main className={classes.main}>
+        {signIn}
+      </main>
+    );
+  }
 }
 SignIn.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
 // export default withStyles(styles)(SignIn);
-const mapStateToProps = state =>({
-  user : state.loginStore.user,
-  logininfo : state.loginStore.logininfo
+const mapStateToProps = state => ({
+  //user : state.loginStore.user,
+  logininfo: state.loginStore.logininfo
 })
-const mapDispatchToProps = dispatch => bindActionCreators ({
+const mapDispatchToProps = dispatch => bindActionCreators({
   loginIn
-},dispatch)
+}, dispatch)
 
 //export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(SignIn));
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(SignIn)))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SignIn)))

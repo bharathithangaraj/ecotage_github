@@ -14,6 +14,7 @@ import Signup from './Authentication/SignUp';
 import OrderResponse from './OrderResponse';
 import PaymentCheckOut from './payment/Checkout';
 import PaymentCheckOut1 from './payment1/Checkout';
+import SearchBar from '../components/SearchBar';
 
 class BodyComponent extends Component {
     
@@ -63,6 +64,10 @@ class BodyComponent extends Component {
                 break;
             case 'Checkout1':                 
                 comp = <PaymentCheckOut1/> 
+                break;
+            
+            case 'SearchBar':
+                comp = <SearchBar/>
                 break;
 
             default: comp =  undefined

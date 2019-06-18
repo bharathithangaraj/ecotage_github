@@ -27,7 +27,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import {resetLoginInfo,resetSignUp,resetUserDetail} from '../action/UserAction';
-import {resetProductInCart} from '../action/action'
+import {resetProductInCart,getProductNamesForSearch} from '../action/action'
+import SearchBar from '../components/SearchBar';
 const styles = theme => ({
   appBar : {
      backgroundColor : '#058541',
@@ -134,10 +135,25 @@ class HomeSearchBar extends React.Component {
   state = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
+    searchData : []
     
   };
 
+  async  componentDidMount(){
+
+      
+    console.log("compononet did mount called")    
+    const { getProductNamesForSearch } = this.props;  
+    let searchData11 = await getProductNamesForSearch();
+    
+    this.setState({searchData:searchData11.data})     
+   }
   
+  async componentWillMount(){
+    let searchData = getProductNamesForSearch();
+     this.setState({searchData:searchData})
+     
+  }
 
   forceUpadteHandler = () => {
     this.forceUpdate()
@@ -181,7 +197,7 @@ class HomeSearchBar extends React.Component {
   };
 
   render() {
-    const { anchorEl, mobileMoreAnchorEl } = this.state;
+    const { anchorEl, mobileMoreAnchorEl, searchData } = this.state;
     const { classes,productInCart,logininfo } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -258,17 +274,20 @@ class HomeSearchBar extends React.Component {
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
-              <InputBase
+              
+              {/* <InputBase
                 placeholder="Search"
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
-              />
+              /> */}
+            <SearchBar className={this.props.inputInput} styleOned={this.props.search} searchData={this.state.searchData} {...this.props}/>
+
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-            {JSON.stringify(logininfo) !== '{}' ?
+            {logininfo.userId ?
              <Typography style={{textDecoration:'none', color:'inherit',paddingTop:'4%',fontWeight:'700',fontFamily:'roboto'}}>Welcome 
              &nbsp;<span style={{color:'#ea6709', textOverflow:'ellipsis', fontWeight:'700',fontFamily:'roboto'}}>{this.props.logininfo.userName}</span>
              </Typography> : undefined}
@@ -331,7 +350,8 @@ const mapDispatchToProps = dispatch => bindActionCreators ({
   resetLoginInfo,
   resetSignUp,
   resetUserDetail,
-  resetProductInCart
+  resetProductInCart,
+  getProductNamesForSearch
 },dispatch)
 
 //export default connect(mapStateToProps)((withStyles(styles)(HomeSearchBar)));

@@ -15,6 +15,7 @@ export const BACK = "BACK"
 export const SHOW_PRODUCTS_IN_CART = 'SHOW_PRODUCTS_IN_CART';
 export const UPDATE_CART_ITEM_QUANTITY = 'UPDATE_CART_ITEM_QUANTITY';
 export const SHOW_ORDERS = 'SHOW_ORDERS';
+export const GET_PRODUCT_NAMES_SEARCH = 'GET_PRODUCT_NAMES_SEARCH';
 
 // user details constants
 
@@ -45,3 +46,4 @@ export const REMOVE_CART_ITEM_QUANTITY_URL = APP_URL+'/cart/product/remove/';
 export const ADD_ORDER_URL = PAYMENT_URL+'/payment/add/';
 export const SHOW_ORDERS_URL = APP_URL+'/order/products';
 export const SHOW_USERS_URL = APP_URL+"/Users/";
+export const GET_PRODUCT_NAMES_SEARCH_URL = APP_URL+"/products/names"

@@ -1,7 +1,7 @@
 
 import { APP_URL,SHOW_ALL_PRODUCT_IN_CART_URL,
     UPDATE_CART_ITEM_QUANTITY_URL,
-    REMOVE_CART_ITEM_QUANTITY_URL,ADD_ORDER_URL,SHOW_ORDERS_URL, SHOW_ORDERS } from "../Action_Constants";
+    REMOVE_CART_ITEM_QUANTITY_URL,ADD_ORDER_URL,SHOW_ORDERS_URL, SHOW_ORDERS,GET_PRODUCT_NAMES_SEARCH_URL } from "../Action_Constants";
 
 export function getAllCategories() {
 
@@ -261,6 +261,20 @@ export function addToOrders(products) {
         
     }
 
+}
+
+export function getProductNamesForSearch() {
+
+    return async function(dispatch) {
+        const res = await fetch(`${GET_PRODUCT_NAMES_SEARCH_URL}`);
+        const productNames = await res.json();
+       // let prodRes = products[0].productResList;       
+       console.log("productNames:::::::::"+JSON.stringify(productNames))
+        return dispatch({
+            type: 'GET_PRODUCT_NAMES_SEARCH',
+            data:productNames
+        })
+    }
 }
 
 export function getAllOrders(userId){

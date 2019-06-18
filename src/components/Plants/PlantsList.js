@@ -132,13 +132,14 @@ class PlantsList extends Component {
         var arr = []
         const {getProduct,getPageUrl,pageUrl,pageId,products,
             resetProducts,getProductDetailUrl,productDetUrl,productId,productInCart} = this.props
-        return (
+            let prod = products;
+            prod = prod.sort((p1,p2) => {return p2.quantity - p1.quantity})
+       
+            return (
             <ImageGrid>
                     
-                    {products.map((list,key) =>
+                    {prod.map((list,key) =>
 
-                    
-                
                     <div style={{padding:'10px'}} key={key}>
                      <Shadow >
                     <Link to={`/${list.navigageTo}`} onClick={()=>getProduct(list.productId)} >
@@ -156,8 +157,6 @@ class PlantsList extends Component {
                      </div>
                         <br/>  
 
-                      
-
                    <input type="submit" 
                      name={list.quantity === 0 ? 'Sold Out' :'Add To Cart'} value={list.quantity === 0 ? 'Sold Out' :'Add To Cart'} 
                      title={list.quantity === 0 ? 'Stocks Not Available' :'Add To Cart'} 
@@ -167,7 +166,6 @@ class PlantsList extends Component {
                       style = {{backgroundColor:  list.quantity ===0 ?'grey':'#058541'}}
                      // style = {{backgroundColor:  arr.length > 0 ?'grey':'#058541'}}
                       /> 
-
                      
                      </BoxDeco>
                      </Shadow>

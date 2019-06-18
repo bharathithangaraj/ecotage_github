@@ -128,6 +128,7 @@ class Signup extends Component{
       } 
       signUpSumbmit = (e) =>{
         
+        
         this.setState({isFormSubmitted:true})
         let formData = {
 
@@ -141,11 +142,14 @@ class Signup extends Component{
 
         e.preventDefault();
 
-        const {signUpDetail} = this.props
-        console.log("sfdjsfjlkdjsflkjsd :::::::"+JSON.stringify(signUpDetail))
-        //if(this.props.signUpDetail.response ? this.props.signUpDetail.response.message === "success" :"") {
-          this.props.history.push('/Signin');
-       // }
+       
+       
+        // if(this.props.signUpDetail.userId != null ) {
+        //   this.props.history.push('/Signin');
+        //  }else {
+        //    let message=this.props.signUpDetail != null ? this.props.signUpDetail.message : 'User Already Exists.!!!'
+        //    this.setState({emailHelperText:message})
+        //  }
       } 
 
       handleClickOpen = (e) => {
@@ -163,11 +167,14 @@ class Signup extends Component{
 
 render() {
     const { classes } = this.props;
-    const { fullScreen } = this.props;
+    const { fullScreen,signUpDetail } = this.props;
     const { emailHelperText,passwordHelperText,mobileNumber,mobileNumberHelperText,
         otpHelperText,
         isFormSubmitted
      } = this.state;
+     if(undefined !== signUpDetail.userId && null !== signUpDetail.userId) {
+      this.props.history.push('/Signin');
+     } 
     const Signup = (
         <Paper className={classes.paper}>
         

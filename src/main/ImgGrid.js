@@ -145,20 +145,20 @@ function ImgGrid() {
   return (
     <div style={{textAlign: "center"}} >
      <ImageGrid>
-            <Link to={`/${Images1[0].to}`}>
+            {/* <Link to={`/${Images1[0].to}`}> */}
             <Poster src={Images1[0].url} alt='image'/>
-            </Link>
-            <Link to={`/${Images1[1].to}`}>
+            {/* </Link> */}
+            {/* <Link to={`/${Images1[1].to}`}> */}
             <Poster src={Images1[1].url} alt='image'/>
-            </Link>
+            {/* </Link> */}
             
             <div style={{display:'flex-column'}}>
-            <Link to={`/${Images1[2].to}`}>
+            {/* <Link to={`/${Images1[2].to}`}> */}
             <Poster src={Images1[2].url} alt='image'/>
-            </Link>
-            <Link to={`/${Images1[3].to}`}>
+            {/* </Link> */}
+            {/* <Link to={`/${Images1[3].to}`}> */}
             <Poster src={Images1[3].url} alt='image'/>
-            </Link>
+            {/* </Link> */}
             </div>
             {/* {Image1.map((list,key) => 
             
@@ -186,9 +186,9 @@ function ImgGrid() {
      <IconGrid>
             {Images2.map((list,key) =>
                 <div style={{textAlign:'center'}}>
-                <Link to={`/${list.to}`}>
+                {/* <Link to={`/${list.to}`}> */}
                  <Poster src={list.url} alt='icon'/>
-                 </Link>
+                 {/* </Link> */}
                  <br/>
                  <b style={{color:'#666', fontSize:'10px'}}>{list.name}</b>
                  </div>
@@ -197,9 +197,9 @@ function ImgGrid() {
 
      <ImageGrid2>
             {Images3.map((list,key) =>
-                <Link to={`/${list.to}`}>
+                // <Link to={`/${list.to}`}>
                  <Poster src={list.url} alt='icon'/>
-                 </Link>
+                //  </Link>
             )}
             
      </ImageGrid2>
@@ -217,9 +217,9 @@ function ImgGrid() {
     <IconGrid>
 
         {Images4.map((list,key) => 
-            <Link to={`/${list.to}`}>
+            // <Link to={`/${list.to}`}>
                  <Poster src={list.url} alt='icon'/>
-                 </Link>
+                //  </Link>
             )}
             
 

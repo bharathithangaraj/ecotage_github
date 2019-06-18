@@ -22,7 +22,9 @@ class RouteComponent extends Component {
         Signup : "Signup",
         OrderResponse : "OrderResponse",
         Payment : 'Checkout',
-        Payment1 : 'Checkout1'
+        Payment1 : 'Checkout1',
+        SearchBar: 'SearchBar'
+       
        
         
       
@@ -31,7 +33,7 @@ class RouteComponent extends Component {
         const {pageUrl,pageId,productDetUrl,productId} = this.props;
         const navigate = `${pageUrl}/${pageId}`
         const {Home,PlantsList,viewProduct,
-          ViewCart,CheckOut,HtmlRender,Signin,Signup,OrderResponse,Payment,Payment1} = this.state
+          ViewCart,CheckOut,HtmlRender,Signin,Signup,OrderResponse,Payment,Payment1,SearchBar} = this.state
         console.log(this.state.Home)
             return(
                 <Switch>
@@ -59,7 +61,7 @@ class RouteComponent extends Component {
                 <Route  path="/Signup" render={(props) => <BodyComponent  {...props} components={Signup}/>} />
                 <Route  path="/Payment" render={(props) => <BodyComponent  {...props} components={Payment}/>} />
                 <Route  path="/Payment1" render={(props) => <BodyComponent  {...props} components={Payment1}/>} />
-
+                <Route  path="/SearchBar" render={(props) => <BodyComponent  {...props} components={SearchBar}/>} />
                 <Route   render={() => <Page404/>} />
                
                 {/* <Route path="Plants/PlantScap" component={HomeSearchBar} />  */}
